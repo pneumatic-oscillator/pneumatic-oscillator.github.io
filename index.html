@@ -1,0 +1,877 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light">
+  <title>Pneumatic Hybrid Oscillator · Siyue Yao</title>
+  <meta name="description" content="An oscillator built from fabric chambers, a snap-through carbon-fiber beam and a switch valve turns constant air pressure into oscillation at up to 51 Hz with no electronics. It drives a jumping, a crawling and an untethered swimming robot.">
+  <meta name="citation_title" content="A non-electrical pneumatic hybrid oscillator for high-frequency multimodal robotic locomotion">
+  <meta name="citation_author" content="Genliang Chen">
+  <meta name="citation_author" content="Yongzhou Long">
+  <meta name="citation_author" content="Siyue Yao">
+  <meta name="citation_author" content="Shujie Tang">
+  <meta name="citation_author" content="Junjie Luo">
+  <meta name="citation_author" content="Hao Wang">
+  <meta name="citation_author" content="Zhuang Zhang">
+  <meta name="citation_author" content="Hanqing Jiang">
+  <meta name="citation_publication_date" content="2025/02/07">
+  <meta name="citation_journal_title" content="Nature Communications">
+  <meta name="citation_volume" content="16">
+  <meta name="citation_issue" content="1">
+  <meta name="citation_firstpage" content="1449">
+  <meta name="citation_publisher" content="Springer Science and Business Media LLC">
+  <meta name="citation_doi" content="10.1038/s41467-025-56704-1">
+  <meta property="og:title" content="Pneumatic Hybrid Oscillator">
+  <meta property="og:description" content="Air in, rhythm out: a 51 Hz pneumatic oscillator with no electronics drives jumping, crawling and swimming robots.">
+  <meta property="og:image" content="https://pneumatic-oscillator.github.io/hero.jpg">
+  <meta property="og:url" content="https://pneumatic-oscillator.github.io/">
+  <link rel="canonical" href="https://pneumatic-oscillator.github.io/">
+  <meta name="theme-color" content="#000000">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23131312'/%3E%3Ctext x='32' y='44' text-anchor='middle' fill='%23ebe8e1' font-family='Georgia' font-size='36'%3ES%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@1,6..72,400&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@1,6..72,400&display=swap"></noscript>
+  <style>
+/* Shared styles for Siyue Yao's project pages.
+   Distilled from the Compliant Wrist, Fluorescent Whisker, FBG Whisker and UMI-Underwater pages:
+   a black opening, light reading sections, and Newsreader italics as the serif accent.
+   Each page sets --accent and --accent-hero on <body>. */
+:root {
+  --ink: #242523;
+  --muted: #6d7069;
+  --line: #e3e5df;
+  --wash: #f7f8f5;
+  --accent: #80611e;
+  --accent-hero: #efc985;
+  --max: 1040px;
+  --read: 800px;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --serif: "Newsreader", Georgia, "Times New Roman", serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+body { margin: 0; background: #fff; color: var(--ink); font: 17px/1.75 var(--sans); -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-underline-offset: 4px; text-decoration-color: #b4b8ac; }
+a:hover { color: var(--accent); }
+button { font: inherit; cursor: pointer; }
+a, button, summary { -webkit-tap-highlight-color: transparent; }
+a:focus-visible, button:focus-visible, summary:focus-visible, pre:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+img, video { display: block; max-width: 100%; height: auto; }
+video { width: 100%; background: #090b08; }
+h1, h2, h3, h4, p, figure { margin: 0; }
+h1, h2, h3, h4 { line-height: 1.2; letter-spacing: -0.035em; }
+p + p { margin-top: 18px; }
+sup { font-size: 0.65em; line-height: 0; vertical-align: super; }
+strong { font-weight: 600; }
+[hidden] { display: none !important; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+.skip { position: absolute; top: -80px; left: 20px; z-index: 40; padding: 8px 15px; background: #fff; color: var(--ink); }
+.skip:focus { top: 10px; }
+
+/* ---------- Opening (both styles) ---------- */
+.hero { position: relative; background: #000; color: #f4f4f1; }
+.hero-nav { position: absolute; inset: 0 0 auto; z-index: 3; display: flex; justify-content: flex-end; gap: 20px; padding: 22px 5vw; font-size: 13px; line-height: 24px; }
+.hero-nav a { color: #efefed; text-decoration: none; }
+.hero-nav a:hover { color: var(--accent-hero); }
+.eyebrow { margin-bottom: 18px; font-size: 11px; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase; color: var(--accent); }
+.hero .eyebrow { color: var(--accent-hero); }
+.hero h1 { font-weight: 600; letter-spacing: -0.045em; text-wrap: balance; }
+.title-main { display: block; font-size: clamp(40px, 4.4vw, 72px); line-height: 1.04; }
+.title-detail { display: block; margin-top: 18px; font-size: clamp(18px, 1.5vw, 23px); font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; color: #e6e6e2; }
+.hero-foot { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; font-size: 12px; line-height: 1.7; color: #d1d1ce; }
+.hero-foot p { margin: 0; }
+.hero-foot a { color: inherit; }
+.motion { flex-shrink: 0; padding: 4px 12px; border: 1px solid #cccec7; border-radius: 20px; background: transparent; color: var(--muted); font-size: 11px; line-height: 1.7; }
+.motion:hover { border-color: var(--ink); color: var(--ink); }
+.hero .motion { border-color: #888; background: #0006; color: #eee; }
+.hero .motion:hover { border-color: #fff; color: #fff; }
+.hero a:focus-visible, .hero button:focus-visible { outline-color: var(--accent-hero); }
+
+/* Full-screen opening: the clip covers the first screen; the title sits over a quiet area.
+   .is-split keeps the clip on the left 64% and fades it into black under the title. */
+.hero--cover .hero-frame { position: relative; isolation: isolate; height: 100svh; min-height: 640px; overflow: hidden; }
+.hero--cover .hero-media { position: absolute; inset: 0; z-index: -2; background: #000; }
+.hero--cover .hero-media video { width: 100%; height: 100%; object-fit: cover; object-position: var(--hero-pos, 50% 50%); background: #000; }
+.hero--cover .hero-frame::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: linear-gradient(180deg, rgba(0, 0, 0, 0.38), transparent 26%, transparent 70%, rgba(0, 0, 0, 0.62)); }
+.hero--cover .hero-heading { position: absolute; top: clamp(84px, 11svh, 124px); right: 5vw; width: min(44vw, 780px); text-shadow: 0 2px 16px #000b; }
+.hero--cover.is-split .hero-media { right: 36%; }
+.hero--cover.is-split .hero-media::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, transparent 62%, #000); }
+.hero--cover.is-split .hero-heading { width: min(32vw, 560px); }
+.hero--cover .hero-foot { position: absolute; left: 5vw; right: 5vw; bottom: 24px; }
+.hero-explore { position: absolute; bottom: 26px; left: 50%; z-index: 1; display: inline-flex; align-items: center; gap: 24px; padding-bottom: 7px; transform: translateX(-50%); border-bottom: 1px solid #aaa; color: #fff; font-size: 13px; text-decoration: none; }
+.hero-explore:hover { border-color: var(--accent-hero); color: var(--accent-hero); }
+
+/* Framed opening: title on black, the clip below at no more than its own width. */
+.hero--stage { padding: 82px 24px 0; }
+.hero--stage .hero-heading { max-width: 980px; margin: 0 auto; text-align: center; }
+.hero--stage .title-main { font-size: clamp(34px, 3.6vw, 54px); line-height: 1.1; }
+.hero-stage-media { position: relative; width: 100%; max-width: min(var(--max), var(--media-w, var(--max))); margin: 34px auto 0; }
+.hero-stage-media::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, #000, transparent 5%, transparent 95%, #000), linear-gradient(180deg, #000, transparent 8%, transparent 92%, #000); }
+.hero-stage-media.is-light::after { display: none; }
+.hero-stage-media.is-light video { outline: 1px solid #ffffff2e; }
+.hero--stage .hero-foot { max-width: min(var(--max), var(--media-w, var(--max))); margin: 12px auto 0; }
+
+/* Authors band under either opening */
+.hero-meta { max-width: 1100px; margin: 0 auto; padding: 36px 24px 44px; text-align: center; }
+.authors { margin: 0 auto; font-size: 16px; line-height: 1.85; }
+.authors a { text-decoration: none; }
+.hero .authors a:hover { color: #fff; text-decoration: underline; }
+.affiliations { margin-top: 10px; font-size: 14px; color: #c0c0bd; }
+.venue { margin-top: 10px; font-size: 13px; font-style: italic; color: #aaa; }
+.actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 24px; }
+.button { display: inline-flex; align-items: center; gap: 16px; padding: 9px 20px; border: 1px solid #555; border-radius: 24px; background: #151515; color: #eee; font-size: 13px; line-height: 1.5; text-decoration: none; }
+.button:first-child { border-color: #f4f4f1; background: #f4f4f1; color: #20211e; }
+.button:hover { border-color: #ddd; background: #252525; color: #fff; }
+.button:first-child:hover { background: #fff; color: #000; }
+
+/* ---------- Page body ---------- */
+.section-nav { position: sticky; top: 0; z-index: 20; display: flex; justify-content: center; gap: 26px; overflow-x: auto; padding: 16px 24px; border-block: 1px solid var(--line); background: #ffffffed; -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); scrollbar-width: none; }
+.section-nav::-webkit-scrollbar { display: none; }
+.section-nav a { flex-shrink: 0; font-size: 12px; white-space: nowrap; text-decoration: none; color: var(--muted); }
+.section-nav a.active { color: var(--accent); }
+.section { padding: 84px 30px; }
+.section.soft { background: var(--wash); }
+.section:not(.soft) + .section:not(.soft) { border-top: 1px solid var(--line); }
+.wide { max-width: var(--max); margin-left: auto; margin-right: auto; }
+.reading { max-width: var(--read); margin-left: auto; margin-right: auto; }
+.reading + .wide, .wide + .reading, .wide + .wide, .reading + .reading { margin-top: 32px; }
+h2 { margin-bottom: 14px; font-size: clamp(31px, 3.1vw, 42px); font-weight: 600; }
+h2 em { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spacing: -0.02em; }
+h3 { margin: 36px 0 14px; font-size: 24px; font-weight: 600; }
+.question { margin: 0 0 26px; font: italic 400 22px/1.45 var(--serif); letter-spacing: -0.01em; color: #6a6d66; }
+.statement { padding: 88px 30px 72px; text-align: center; }
+.statement .lead { max-width: 760px; margin: 22px auto 0; font-size: 22px; line-height: 1.6; color: #474c43; }
+.statement .lead + p { margin-top: 20px; color: #5e645a; }
+.note { margin-top: 24px; padding-left: 14px; border-left: 2px solid var(--line); font-size: 14px; line-height: 1.7; color: var(--muted); }
+
+/* Media blocks */
+figcaption { font-size: 13px; line-height: 1.65; color: var(--muted); }
+.figure-foot { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; margin-top: 12px; }
+.figure-foot > span { flex: 1; }
+.clip > figcaption:not(.figure-foot) { margin-top: 12px; }
+/* A figure fits on one screen below the sticky nav (a tall one keeps its proportions, centred); click for the large view.
+   Multiplied onto the section behind it, so the white it is drawn on takes the section's colour (the large view keeps white). */
+.paper-fig img { width: 100%; max-height: max(320px, calc(100svh - 200px)); object-fit: contain; mix-blend-mode: multiply; }
+.paper-fig figcaption { margin-top: 12px; text-align: center; }
+.zoom { display: block; cursor: zoom-in; }
+.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; align-items: start; }
+.trio { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; align-items: start; }
+/* .pair.match: each item grows in proportion to its media's aspect ratio (--ar = width / height on the item),
+   so the two images or clips come out the same height */
+.pair.match { display: flex; align-items: flex-start; }
+.pair.match > * { flex: var(--ar, 1) 1 0; min-width: 0; }
+.strip { display: grid; grid-template-columns: repeat(var(--cols, 4), minmax(0, 1fr)); gap: 14px; }
+.strip img { width: 100%; aspect-ratio: var(--ratio, 4 / 5); object-fit: cover; border-radius: 3px; background: #0b0b0b; }
+.strip--contain img { object-fit: contain; }
+.strip--scroll { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 190px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x proximity; padding-bottom: 10px; scrollbar-width: thin; }
+.strip--scroll > figure { scroll-snap-align: start; }
+.strip--scroll:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.strip figcaption { margin-top: 8px; font-size: 12px; line-height: 1.5; }
+.strip figcaption b { display: block; font-size: 13px; font-weight: 600; color: var(--ink); }
+.strip + .strip-caption { margin-top: 14px; }
+.strip-caption { font-size: 13px; text-align: center; color: var(--muted); }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); padding: 22px 0; border-block: 1px solid var(--line); }
+.stat { padding: 6px 12px; text-align: center; }
+.stat + .stat { border-left: 1px solid var(--line); }
+.stat b { display: block; font-size: 30px; font-weight: 500; line-height: 1.2; letter-spacing: -0.04em; color: #2c2e2a; }
+.stat span { display: block; margin-top: 8px; font-size: 12px; line-height: 1.5; color: var(--muted); }
+.steps { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 22px; padding: 28px 0; border-block: 1px solid var(--line); }
+.steps > div { padding: 0 20px; }
+.steps > div > span { font-size: 12px; color: var(--accent); }
+.steps h4 { margin: 10px 0; font-size: 22px; font-weight: 500; }
+.steps p { font-size: 14px; line-height: 1.6; color: var(--muted); }
+.steps > .arrow { align-self: center; font-size: 24px; color: #aeb4a7; }
+.tabs { display: flex; gap: 26px; margin-bottom: 20px; overflow-x: auto; border-bottom: 1px solid #cacfc3; scrollbar-width: none; }
+.tabs::-webkit-scrollbar { display: none; }
+.tabs button { flex-shrink: 0; margin-bottom: -1px; padding: 12px 0; border: 0; border-bottom: 2px solid transparent; background: none; color: var(--muted); font-size: 14px; white-space: nowrap; }
+.tabs button[aria-selected="true"] { border-bottom-color: var(--accent); color: var(--ink); }
+.tab-panel:not([hidden]) + .tab-panel { margin-top: 36px; }
+.tab-panel > p { max-width: var(--read); margin: 16px auto 0; font-size: 15px; }
+.evidence { border-block: 1px solid var(--line); }
+.evidence summary { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 16px 0; font-size: 14px; font-weight: 500; list-style: none; cursor: pointer; }
+.evidence summary::-webkit-details-marker { display: none; }
+.evidence summary::after { content: "+"; font-size: 20px; font-weight: 400; color: var(--muted); }
+.evidence[open] summary::after { content: "−"; }
+.evidence > :not(summary) { margin-bottom: 24px; }
+.evidence + .evidence { border-top: 0; }
+
+/* Data tables (values from the paper's tables): .table-wrap scrolls sideways on narrow screens */
+.table-wrap { overflow-x: auto; overscroll-behavior-x: contain; }
+.table-wrap:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.data-table { width: 100%; border-collapse: collapse; font-size: 14px; line-height: 1.5; font-variant-numeric: tabular-nums; }
+.data-table th, .data-table td { padding: 10px 14px; border-bottom: 1px solid var(--line); text-align: right; }
+.data-table td { white-space: nowrap; }
+.data-table th:first-child, .data-table td:first-child { padding-left: 0; text-align: left; }
+.data-table th:last-child, .data-table td:last-child { padding-right: 0; }
+.data-table thead th { border-bottom-color: #cacfc3; font-size: 12px; font-weight: 600; line-height: 1.4; color: var(--muted); vertical-align: bottom; }
+.data-table tbody th { font-weight: 500; }
+.table-fig figcaption { margin-top: 12px; text-align: center; }
+/* .grouped: one tbody per group, its name in a th spanning the group's rows (scope="rowgroup"); lines only between
+   groups. .fit: only as wide as the columns, centred. */
+.data-table.grouped tbody tr > * { padding-top: 6px; padding-bottom: 6px; border-bottom: 0; }
+.data-table.grouped tbody tr:first-child > * { padding-top: 14px; }
+.data-table.grouped tbody tr:last-child > * { padding-bottom: 14px; }
+.data-table.grouped tbody + tbody tr:first-child > * { border-top: 1px solid var(--line); }
+.data-table.grouped tbody th[rowspan] { font-weight: 600; vertical-align: top; }
+.data-table.grouped tbody td:first-of-type { padding-left: 14px; color: var(--muted); text-align: right; }
+.data-table.fit { width: auto; margin: 0 auto; }
+.data-table.fit th, .data-table.fit td { padding-right: 26px; padding-left: 26px; }
+.data-table.fit th:first-child, .data-table.fit td:first-child { padding-left: 0; }
+.data-table.fit th:last-child, .data-table.fit td:last-child { padding-right: 0; }
+/* A table with color blocks of the same shares beside it (.heatmap, e.g. a classifier's results). Both are .data-table
+   with the same header rows ("Identified as" over the classes: th.axis), so their rows line up; the rows are taller
+   here, so the blocks come out square. A block is the palette's light end mixed toward its dark end by its share
+   (--v, 0 to 1), with rounded corners and a gap around it; th.axis-rows titles the rows, turned to read upward. */
+.table-pair { display: grid; grid-template-columns: minmax(0, 470px) auto; justify-content: center; align-items: start; gap: 64px; }
+.table-pair .data-table tbody th, .table-pair .data-table tbody td { padding-top: 15px; padding-bottom: 15px; }
+.data-table thead tr:not(:last-child) th { padding-bottom: 6px; }
+.data-table thead th:empty { border-bottom-color: transparent; }
+.data-table thead th.axis { font-size: 11px; letter-spacing: 0.08em; text-align: center; text-transform: uppercase; }
+.heatmap { --hm-low: #e9f2f5; --hm-high: #14527a; width: auto; }
+.heatmap th, .heatmap td, .heatmap thead th { border-bottom-color: transparent; }
+.heatmap thead th + th { padding-right: 0; padding-left: 0; text-align: center; }
+.heatmap tbody th:not(.axis-rows) { padding-right: 10px; padding-left: 0; font-size: 12px; line-height: 21px; color: var(--muted); text-align: right; }
+/* The rows' title is ordinary text turned 90° in a column of its own: vertical writing-mode in a narrow cell wraps and
+   overflows in Safari. */
+.heatmap th.axis-rows { position: relative; width: 28px; padding: 0; }
+.heatmap th.axis-rows span { position: absolute; top: 50%; left: 50%; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; line-height: 1.4; color: var(--muted); text-transform: uppercase; white-space: nowrap; transform: translate(-50%, -50%) rotate(-90deg); }
+.heatmap td { position: relative; z-index: 0; width: 52px; padding-right: 0; padding-left: 0; font-size: 13px; font-weight: 500; line-height: 21px; color: #33404a; text-align: center; }
+.heatmap td::before { content: ""; position: absolute; inset: 2px; z-index: -1; border-radius: 5px; background: color-mix(in oklab, var(--hm-high) calc(var(--v, 0) * 100%), var(--hm-low)); }
+.heatmap td.dark { color: #fff; }
+
+/* Beyond the paper */
+.beyond .eyebrow { color: var(--muted); }
+.beyond .eyebrow::before { content: ""; display: inline-block; width: 8px; height: 8px; margin-right: 8px; border: 1px solid currentColor; border-radius: 50%; vertical-align: 1px; }
+
+/* Q&A */
+.qa details { border-top: 1px solid var(--line); }
+.qa details:last-child { border-bottom: 1px solid var(--line); }
+.qa summary { display: flex; justify-content: space-between; gap: 24px; padding: 16px 0; font-size: 16px; font-weight: 500; list-style: none; cursor: pointer; }
+.qa summary::-webkit-details-marker { display: none; }
+.qa summary::after { content: "+"; color: #999; }
+.qa details[open] summary::after { content: "−"; }
+.qa details p { padding: 0 20px 18px 0; font-size: 15px; line-height: 1.8; color: #555; }
+
+/* Paper & citation */
+.paper-title { margin-top: 8px; font-size: 21px; font-weight: 500; line-height: 1.5; }
+.section .venue { color: var(--muted); }
+.paper-links { display: flex; flex-wrap: wrap; gap: 8px 26px; margin-top: 20px; }
+.text-link { font-size: 14px; color: var(--accent); }
+.citation { margin-top: 32px; }
+.citation-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 22px; margin: 4px 0 12px; font-size: 13px; color: var(--accent); }
+.citation-copy { padding: 6px 15px; border: 1px solid #c8ccc3; border-radius: 20px; background: #fff; color: var(--ink); font-size: 12px; line-height: 1.6; }
+.citation-copy:hover { border-color: var(--accent); color: var(--accent); }
+.citation-status { min-height: 1.6em; font-size: 13px; color: var(--muted); }
+.citation pre { max-width: 100%; margin: 8px 0 24px; padding: 18px 20px; overflow-wrap: anywhere; white-space: pre-wrap; border: 1px solid var(--line); border-radius: 3px; background: #fff; color: #4a4e45; font: 12px/1.75 var(--mono); tab-size: 2; }
+.affiliation-list { padding-left: 22px; font-size: 14px; line-height: 1.7; }
+.affiliation-list li { padding: 4px 0; }
+.small { font-size: 13px; }
+.credit { margin-top: 28px; font-size: 12px; line-height: 1.6; color: var(--muted); }
+
+/* Full video */
+.chapters { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 22px; margin-top: 18px; }
+.chapters button { padding: 4px 0; border: 0; border-bottom: 1px solid #c8ccc3; background: none; color: #4e5746; font-size: 12px; }
+.chapters button:hover { border-color: var(--accent); color: var(--accent); }
+.chapters span { margin-right: 6px; color: #858b7d; font-variant-numeric: tabular-nums; }
+
+/* Related & footer */
+.related-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 0; padding: 0; list-style: none; }
+.related-list a { display: block; height: 100%; padding: 16px 18px; border: 1px solid var(--line); border-radius: 4px; text-decoration: none; }
+.related-list a:hover { border-color: var(--accent); }
+.related-list b { display: block; font-size: 15px; font-weight: 600; line-height: 1.35; }
+.related-list span { display: block; margin-top: 6px; font-size: 12px; line-height: 1.5; color: var(--muted); }
+.footer { display: flex; justify-content: flex-end; gap: 20px; max-width: 1200px; margin: 0 auto; padding: 30px 32px 42px; border-top: 1px solid var(--line); font-size: 11px; color: var(--muted); }
+.footer a { text-decoration: none; }
+.footer p { margin: 0; }
+
+/* Lightbox */
+dialog { width: calc(100vw - 48px); max-width: 1400px; max-height: calc(100vh - 48px); padding: 30px; overflow: auto; border: 0; background: #fff; }
+dialog::backdrop { background: #171d15e8; }
+dialog img { width: auto; max-width: 100%; margin: 0 auto; }
+.close-lightbox { position: sticky; top: 0; z-index: 1; display: block; margin: -16px -16px 4px auto; padding: 5px 10px; border: 0; background: #fff; color: #323c2a; font-size: 28px; line-height: 1; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .hero--cover .hero-frame { min-height: 640px; }
+  .hero--cover.is-split .hero-media { right: 0; }
+  .hero--cover.is-split .hero-media::after { display: none; }
+  .hero--cover .hero-media video { object-position: var(--hero-pos-mobile, var(--hero-pos, 50% 50%)); }
+  .hero--cover .hero-frame::after { background: linear-gradient(180deg, rgba(0, 0, 0, 0.42), rgba(0, 0, 0, 0.05) 24%, rgba(0, 0, 0, 0.45) 48%, rgba(0, 0, 0, 0.9) 74%, rgba(0, 0, 0, 0.96)); }
+  .hero--cover .hero-heading, .hero--cover.is-split .hero-heading { top: auto; right: 32px; bottom: 150px; left: 32px; width: auto; max-width: 640px; }
+  .hero-explore { bottom: 92px; left: 32px; transform: none; }
+  .hero-nav { padding: 20px 32px; }
+  .hero--cover .hero-foot { right: 32px; left: 32px; }
+  .trio { grid-template-columns: 1fr; }
+  .table-pair { grid-template-columns: minmax(0, 470px); gap: 28px; }
+  .heatmap { justify-self: center; }
+}
+@media (max-width: 800px) {
+  .desktop-break { display: none; }
+  .authors { font-size: 14px; }
+  .affiliations { font-size: 12px; }
+  .section-nav { justify-content: flex-start; gap: 22px; }
+  .section { padding: 62px 24px; }
+  .statement { padding: 62px 24px 52px; }
+  .statement .lead { font-size: 20px; }
+  .stat b { font-size: 26px; }
+  .footer { flex-wrap: wrap; }
+  .footer p { order: 3; width: 100%; text-align: center; }
+}
+@media (max-width: 650px) {
+  .hero--cover .hero-heading, .hero--cover.is-split .hero-heading { right: 24px; left: 24px; }
+  .title-main { font-size: clamp(36px, 10vw, 52px); }
+  .title-detail { margin-top: 14px; font-size: 17px; }
+  .hero-explore { left: 24px; font-size: 12px; }
+  .hero--cover .hero-foot { right: 24px; bottom: 20px; left: 24px; font-size: 11px; }
+  .hero-nav { padding: 16px 24px; font-size: 12px; }
+  .hero--stage { padding: 72px 16px 0; }
+  .hero-meta { padding: 28px 20px 32px; }
+  .actions { gap: 8px; }
+  .button { gap: 12px; padding: 8px 13px; font-size: 12px; }
+  .pair { grid-template-columns: 1fr; }
+  .pair.match { flex-direction: column; }
+  .pair.match > * { flex: none; width: 100%; }
+  .strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .strip--scroll { grid-template-columns: none; grid-auto-columns: 150px; }
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 16px; }
+  .stat + .stat { border-left: 0; }
+  .stat:nth-child(even) { border-left: 1px solid var(--line); }
+  .steps { grid-template-columns: 1fr; gap: 18px; }
+  .steps > .arrow { display: none; }
+  .figure-foot { flex-wrap: wrap; gap: 10px; }
+  .figure-foot > span { flex-basis: 100%; }
+  .figure-foot .motion { margin-left: auto; }
+}
+@media (max-width: 480px) {
+  body { font-size: 16px; }
+  h2 { font-size: 29px; }
+  .question { font-size: 20px; }
+  .section { padding: 50px 20px; }
+  .tabs { gap: 20px; }
+  .tabs button { font-size: 13px; }
+  .chapters { justify-content: flex-start; gap: 10px 18px; }
+  .data-table { font-size: 13px; }
+  .heatmap td { width: 50px; font-size: 12px; }
+  dialog { width: calc(100vw - 22px); padding: 28px 10px 10px; }
+  .citation pre { padding: 14px 12px; font-size: 11px; }
+}
+@media (max-height: 600px) and (min-width: 901px) {
+  .hero--cover .hero-frame { min-height: 540px; }
+  .hero--cover .hero-heading { top: 76px; }
+  .title-main { font-size: 44px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+  </style>
+</head>
+<body style="--accent:#6a3d9e; --accent-hero:#c9a6ff">
+  <a class="skip" href="#overview">Skip to content</a>
+
+  <header class="hero hero--cover is-split" style="--hero-pos:100% 50%; --hero-pos-mobile:69% 50%">
+    <div class="hero-frame">
+      <div class="hero-media">
+        <video id="hero-video" class="loop" muted loop playsinline controls preload="metadata" poster="hero.jpg" width="1920" height="1080" aria-label="The untethered swimming robot stands on a black drape and flaps its white fin from side to side." aria-describedby="hero-caption">
+          <source src="hero.mp4" type="video/mp4">
+        </video>
+      </div>
+      <nav class="hero-nav" aria-label="Site">
+        <a href="https://doi.org/10.1038/s41467-025-56704-1">Paper ↗</a>
+      </nav>
+      <div class="hero-heading">
+        <p class="eyebrow">Soft actuation</p>
+        <h1><span class="title-main">Pneumatic Hybrid Oscillator</span><span class="title-detail">A non-electrical oscillator for high-frequency multimodal robotic locomotion</span></h1>
+      </div>
+      <a class="hero-explore" href="#overview">Explore the design <span aria-hidden="true">↓</span></a>
+      <div class="hero-foot">
+        <p id="hero-caption">Untethered swimmer: with its CO₂ cylinder on board, the robot flaps its fin on a black drape.</p>
+        <button class="motion" type="button" data-video="hero-video">Play clip</button>
+      </div>
+    </div>
+    <div class="hero-meta">
+      <p class="authors"><span style="white-space:nowrap">Genliang Chen<sup>1–3,†,*</sup>,</span> <span style="white-space:nowrap">Yongzhou Long<sup>1,2,†</sup>,</span> <span style="white-space:nowrap">Siyue Yao<sup>1,2</sup>,</span> <span style="white-space:nowrap">Shujie Tang<sup>1,2</sup>,</span> <span style="white-space:nowrap">Junjie Luo<sup>1,2</sup>,</span><br class="desktop-break"> <span style="white-space:nowrap">Hao Wang<sup>1,2</sup>,</span> <span style="white-space:nowrap">Zhuang Zhang<sup>4,5,*</sup>,</span> <span style="white-space:nowrap">Hanqing Jiang<sup>5,6,*</sup></span></p>
+      <p class="affiliations"><span style="white-space:nowrap"><sup>1–3</sup> Shanghai Jiao Tong University</span> &nbsp;·&nbsp; <span style="white-space:nowrap"><sup>4</sup> Fudan University</span> &nbsp;·&nbsp; <span style="white-space:nowrap"><sup>5,6</sup> Westlake University</span> &nbsp;·&nbsp; <sup>†</sup>&nbsp;Equal&nbsp;contribution &nbsp;·&nbsp; <sup>*</sup>&nbsp;Corresponding&nbsp;authors</p>
+      <p class="venue">Nature Communications 16, 1449 (2025)</p>
+      <div class="actions">
+        <a class="button" href="https://doi.org/10.1038/s41467-025-56704-1">Paper <span aria-hidden="true">↗</span></a>
+        <a class="button" href="#jumping">Robot demos <span aria-hidden="true">↓</span></a>
+        <a class="button" href="#video">Videos <span aria-hidden="true">▷</span></a>
+        <a class="button" href="#citation">BibTeX</a>
+      </div>
+    </div>
+  </header>
+
+  <nav class="section-nav" aria-label="On this page">
+    <a href="#overview">Overview</a><a href="#why">Why</a><a href="#principle">Principle</a><a href="#frequency">Frequency</a><a href="#jumping">Jumping</a><a href="#crawling">Crawling</a><a href="#swimming">Swimming</a><a href="#paper">Paper</a><a href="#video">Video</a>
+  </nav>
+
+  <main>
+    <section class="section statement" id="overview">
+      <div class="reading">
+        <p class="eyebrow">The idea</p>
+        <h2>Air in, rhythm out:<br><em>a 51 Hz oscillator with no electronics.</em></h2>
+        <p class="lead">Two fabric chambers, a carbon-fiber beam and a switch valve turn a constant air supply into a back-and-forth rotation, up to 51 times a second.</p>
+        <p>The beam snaps between its two stable shapes in <span style="white-space:nowrap">9 ms</span>, and each snap flips the valve, which sends the air to the other chamber. No microcontroller or solenoid valve is involved. The same oscillator drives a jumping robot modeled on a kangaroo, a crawling robot built from two linked oscillators, and a swimming robot that carries its own CO₂ cylinder.</p>
+      </div>
+    </section>
+
+    <section class="section soft" id="why">
+      <div class="reading">
+        <p class="eyebrow">01 / Why a pneumatic oscillator</p>
+        <h2>Rhythm<br><em>without electronics.</em></h2>
+        <p class="question">Why build a robot's clock out of air?</p>
+        <p>Birds flap their wings, kangaroos swing their legs and fish beat their tails: periodic motion is how many animals move. Robots that copy these motions need a periodic drive, and many rely on electronics for it, with continuous power and a clock signal. That makes them bulky and complex, and limits them where electromagnetic fields are strong or electricity is scarce.</p>
+        <p>Pneumatic oscillators built from soft, non-electrical logic gates turn a constant pressure into a periodic output without any electronics. Until now they have been slow: the fastest that also drives motion reached <span style="white-space:nowrap">15 Hz</span>, and designs that save energy with bistable parts stayed at or below <span style="white-space:nowrap">3.3 Hz</span>. When they are chained in a ring, the ring must have an odd number of oscillators, and in most existing designs the phase cannot be tuned.</p>
+        <p>This oscillator reaches <span style="white-space:nowrap">51 Hz</span>, links in any number, and its phase can be set.</p>
+      </div>
+      <figure class="reading paper-fig"><a class="zoom" href="fig-1-overview.webp"><img src="fig-1-overview.webp" width="1835" height="1664" loading="lazy" alt="Figure 1: a rendered oscillator under an arc labelled high frequency, 51 Hz, with crawling, jumping and swimming robots around it; a log-log plot of speed against frequency for pneumatic robots, with this work's robot at the top right; and the oscillator's labelled parts."></a><figcaption><span style="white-space:nowrap">Fig. 1</span>: (a) the oscillator and the three robots it drives; (b) speed against frequency for pneumatic robots in the literature and this work's jumping robot; (c) the oscillator's parts.</figcaption></figure>
+    </section>
+
+    <section class="section" id="principle">
+      <div class="reading">
+        <p class="eyebrow">02 / Working principle</p>
+        <h2>Soft, elastic,<br><em>rigid.</em></h2>
+        <p class="question">How does a constant pressure become a <span style="white-space:nowrap">51 Hz</span> beat?</p>
+        <p>The oscillator joins three parts of very different stiffness. Two fabric chambers, one on each side, turn the active joint: the fabric, <span style="white-space:nowrap">0.16 mm</span> thick, bends easily but does not stretch, so the pressure goes into turning the joint rather than into stretching the material. A carbon-fiber beam, <span style="white-space:nowrap">0.3 mm</span> thick, links the active joint to a passive joint at its other end. The beam is bistable: as the active joint turns, it bends further and stores energy, until it snaps through to its other stable shape.</p>
+        <p>The snap flips a rigid rocker on the passive joint. The rocker belongs to a switch valve with four fabric tubes, two of them pinched shut at any moment. When it flips, the tube that was feeding one chamber is pinched, that chamber empties to the air, and the other chamber starts to fill and turns the joint back. This repeats for as long as air is supplied. Because the active and passive joints move out of phase, the beam does not jam during a snap.</p>
+      </div>
+      <figure class="wide paper-fig"><a class="zoom" href="fig-2-principle.webp"><img src="fig-2-principle.webp" width="2000" height="630" loading="lazy" alt="Figure 2a: an actuation chamber, a buckling elastic beam and a switch valve, added together to form the pneumatic hybrid oscillator."></a><figcaption><span style="white-space:nowrap">Fig. 2a</span>: actuation chamber + buckling elastic beam + switch valve = the pneumatic hybrid oscillator.</figcaption></figure>
+      <div class="wide steps" aria-label="One half-cycle">
+        <div><span>01</span><h4>Chambers turn the joint</h4><p>Air fills one fabric chamber, which turns the active joint and bends the beam.</p></div><span class="arrow" aria-hidden="true">→</span>
+        <div><span>02</span><h4>Beam snaps</h4><p>The carbon-fiber beam snaps through to its other stable shape, in <span style="white-space:nowrap">9 ms</span>.</p></div><span class="arrow" aria-hidden="true">→</span>
+        <div><span>03</span><h4>Rocker re-routes air</h4><p>The rocker flips, pinching one tube and opening another, so the other chamber fills.</p></div>
+      </div>
+      <figure class="wide clip"><video id="clip-principle" class="loop" muted loop playsinline controls preload="none" poster="clip-principle.jpg" width="1280" height="466" aria-label="Schematic animation: chamber A fills while chamber B empties, the beam snaps, the valve's tubes swap, and chamber B fills while A empties."><source src="clip-principle.mp4" type="video/mp4"></video><figcaption class="figure-foot"><span>Schematic animation of one cycle: chamber A fills while chamber B empties; then the beam snaps, the valve switches, and the two chambers swap roles.</span><button type="button" class="motion" data-video="clip-principle">Play clip</button></figcaption></figure>
+      <div class="reading">
+        <p>In the real oscillator, the rigid parts are 3D-printed. A high-speed camera filming at <span style="white-space:nowrap">1000 frames</span> per second shows the beam snapping through in <span style="white-space:nowrap">9 ms</span> and a full cycle taking <span style="white-space:nowrap">19 ms</span>, which is <span style="white-space:nowrap">51 Hz</span>. The oscillator kept running for more than <span style="white-space:nowrap">3 million</span> cycles without a significant loss of performance.</p>
+      </div>
+      <figure class="reading clip" style="max-width:600px"><video id="clip-snap" class="loop" muted loop playsinline controls preload="none" poster="clip-snap.jpg" width="1128" height="1080" aria-label="Black-and-white high-speed view from above: the oscillator's four-armed rocker turns back and forth."><source src="clip-snap.mp4" type="video/mp4"></video><figcaption class="figure-foot"><span>The oscillator at <span style="white-space:nowrap">51 Hz</span> and <span style="white-space:nowrap">180 kPa</span>, filmed at high speed: the four-armed rocker turns back and forth as the valve switches. 30× slow motion.</span><button type="button" class="motion" data-video="clip-snap">Play clip</button></figcaption></figure>
+      <figure class="wide paper-fig"><a class="zoom" href="fig-2-high-speed.webp"><img src="fig-2-high-speed.webp" width="2000" height="352" loading="lazy" alt="Figure 2g: five high-speed frames at 0, 4, 9, 15 and 19 ms, from the initial state through a half cycle to a full cycle."></a><figcaption><span style="white-space:nowrap">Fig. 2g</span>: high-speed frames of one cycle, <span style="white-space:nowrap">19 ms</span> from start to finish.</figcaption></figure>
+      <details class="evidence reading"><summary>See the real parts in the loop</summary><figure class="paper-fig"><a class="zoom" href="fig-2-construction.webp"><img src="fig-2-construction.webp" width="2000" height="607" loading="lazy" alt="Figure 2f: photographs of a fabric actuation chamber, the elastic beam bending up and down, and the switch valve with its four tubes, linked by arrows labelled actuate, switch and in/deflate."></a><figcaption><span style="white-space:nowrap">Fig. 2f</span>: the actuation chamber, the elastic beam and the switch valve, in the feedback loop that keeps the oscillator running.</figcaption></figure></details>
+    </section>
+
+    <section class="section soft" id="frequency">
+      <div class="reading">
+        <p class="eyebrow">03 / Frequency model</p>
+        <h2>A frequency<br><em>you can design.</em></h2>
+        <p class="question">Can we predict how fast it will oscillate?</p>
+        <p>The authors model the oscillator as an electrical circuit. Each chamber acts as a capacitor that stores pneumatic energy; the beam as a capacitor joined to a comparator that flips state when the beam snaps; and the valve as a pair of resistances that switch between high and low. Further resistances stand for the losses in the chambers, the beam and the tubes. The model predicts the oscillation frequency from the supply pressure and the beam's design: its normalized length λ, the assembled length divided by the original length, and its bending stiffness EI.</p>
+        <p>Nine oscillators, with λ from 0.93 to 0.98 and EI from 0.9 to <span style="white-space:nowrap">2.3 mN·m²</span>, were tested against the model. Their frequency rises roughly logarithmically with pressure up to about <span style="white-space:nowrap">80 kPa</span>, then levels off and peaks at about <span style="white-space:nowrap">120–150 kPa</span>, because at high pressure the soft valve partly blocks the airflow. A stiffer beam needs more torque to snap, which lowers the frequency; a beam with both a low λ and a low stiffness weakens the valve's blocking, and the oscillation stops early at high pressure.</p>
+        <p>With <span style="white-space:nowrap">λ = 0.98</span> and <span style="white-space:nowrap">EI = 1.6 mN·m²</span>, the oscillator reached <span style="white-space:nowrap">51 Hz</span>: 3.3 times the fastest earlier oscillator that drives motion, and 15 times a bistable ring oscillator. It works with supply pressures from 8 to <span style="white-space:nowrap">180 kPa</span>.</p>
+      </div>
+      <div class="wide pair match">
+        <figure class="clip" style="--ar:1.1315"><video id="clip-ramp" class="loop" muted loop playsinline controls preload="none" poster="clip-ramp.jpg" width="1222" height="1080" aria-label="The oscillator under violet light, its rocker wheel blurred, while labels show the frequency rising to 51 Hz and the pressure to 180 kPa."><source src="clip-ramp.mp4" type="video/mp4"></video><figcaption class="figure-foot"><span>Under violet light, as the supply pressure is raised to <span style="white-space:nowrap">180 kPa</span>, the frequency label reaches <span style="white-space:nowrap">51 Hz</span>; at this rate the rocker is a blur. Real time.</span><button type="button" class="motion" data-video="clip-ramp">Play clip</button></figcaption></figure>
+        <figure class="paper-fig" style="--ar:1.1775"><a class="zoom" href="fig-3-frequency.webp"><img src="fig-3-frequency.webp" width="1128" height="958" loading="lazy" alt="Figure 3e: frequency against supply pressure from 0 to 180 kPa for three normalized lengths, 0.98, 0.95 and 0.93, at EI 1.6 mN·m²; the frequency rises and levels off, highest for 0.98."></a><figcaption><span style="white-space:nowrap">Fig. 3e</span>: frequency against supply pressure for <span style="white-space:nowrap">λ = 0.98,</span> 0.95 and 0.93 at <span style="white-space:nowrap">EI = 1.6 mN·m²</span>; dashed lines from the model, markers from the experiments.</figcaption></figure>
+      </div>
+      <div class="wide stats">
+        <div class="stat"><b>51 Hz</b><span>Highest frequency, λ&nbsp;=&nbsp;0.98, EI&nbsp;=&nbsp;1.6&nbsp;mN·m²</span></div>
+        <div class="stat"><b>9 ms</b><span>Snap-through; 19&nbsp;ms per cycle</span></div>
+        <div class="stat"><b>&gt; 3 million</b><span>Cycles without significant degradation</span></div>
+        <div class="stat"><b>8–180 kPa</b><span>Supply pressures it works with</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="jumping">
+      <div class="reading">
+        <p class="eyebrow">04 / Jumping robot</p>
+        <h2>A 28 Hz<br><em>kangaroo.</em></h2>
+        <p class="question">What does a fast oscillator do for a legged robot?</p>
+        <p>A kangaroo reaches <span style="white-space:nowrap">8 body lengths</span> per second with rapid swings of its feet. The kangaroo-inspired robot fixes a two-legged frame to the oscillator's active joint. Backward-angled nails on its feet grip harder in one direction than the other, and a flexible tail keeps it balanced. Like the animal, it moves in three phases: pushing, taking off and landing.</p>
+        <p>The supply pressure sets the oscillator's frequency, and with it the robot's speed. At <span style="white-space:nowrap">100 kPa</span> the robot runs at <span style="white-space:nowrap">28 Hz</span> and reaches <span style="white-space:nowrap">5.1 body lengths</span> per second (<span style="white-space:nowrap">5.1 BL/s</span>, <span style="white-space:nowrap">68 cm/s</span>), more than twice the speed of pneumatic robots that use electromagnetic valves. It can be driven at up to <span style="white-space:nowrap">36 Hz</span>, but above about <span style="white-space:nowrap">28 Hz</span> it stays in the air longer and completes several motion cycles mid-air, so it gets no faster. The fastest leg mounting angle was <span style="white-space:nowrap">β = 100°</span>, and the robot weighs <span style="white-space:nowrap">30 g</span>.</p>
+      </div>
+      <div class="wide pair match">
+        <figure class="clip" style="--ar:1.3169"><video id="clip-race" class="loop" muted loop playsinline controls preload="none" poster="clip-race.jpg" width="1280" height="972" aria-label="Side view of three lanes: three small jumping robots driven at 14, 17 and 28 Hz hop from right to left; the 28 Hz robot leaves the frame first."><source src="clip-race.mp4" type="video/mp4"></video><figcaption class="figure-foot"><span>Three robots at 14, 17 and <span style="white-space:nowrap">28 Hz</span>, supplied at 40, 60 and <span style="white-space:nowrap">100 kPa</span>; the <span style="white-space:nowrap">28 Hz</span> robot leaves the frame while the other two are still crossing. Real time.</span><button type="button" class="motion" data-video="clip-race">Play clip</button></figcaption></figure>
+        <figure class="clip" style="--ar:1.3169"><video id="clip-hop" class="loop" muted loop playsinline controls preload="none" poster="clip-hop.jpg" width="1280" height="972" aria-label="The same three lanes slowed down: each robot swings its legs and hops leftward, labelled with its speed."><source src="clip-hop.mp4" type="video/mp4"></video><figcaption class="figure-foot"><span>The same three runs, labelled with their speeds: 1.1, 2.3 and <span style="white-space:nowrap">5.1 BL/s</span>. 8× slow motion.</span><button type="button" class="motion" data-video="clip-hop">Play clip</button></figcaption></figure>
+      </div>
+      <figure class="reading paper-fig"><a class="zoom" href="fig-4-running.webp"><img src="fig-4-running.webp" width="1606" height="1042" loading="lazy" alt="Figure 4d: three overlaid photo sequences of the robot running at 28, 17 and 14 Hz, with time stamps from 0 to 1000 ms and the speeds 5.1, 2.3 and 1.1 body lengths per second."></a><figcaption><span style="white-space:nowrap">Fig. 4d</span>: runs at 28, 17 and <span style="white-space:nowrap">14 Hz</span>, with the robot's position over <span style="white-space:nowrap">1 s</span>.</figcaption></figure>
+      <div class="wide stats">
+        <div class="stat"><b>5.1 BL/s</b><span>Top speed, 68&nbsp;cm/s, at 28&nbsp;Hz</span></div>
+        <div class="stat"><b>36 Hz</b><span>Highest driving frequency</span></div>
+        <div class="stat"><b>30 g</b><span>Robot mass</span></div>
+      </div>
+    </section>
+
+    <section class="section soft" id="crawling">
+      <div class="reading">
+        <p class="eyebrow">05 / Crawling robot</p>
+        <h2>Oscillators that<br><em>keep step.</em></h2>
+        <p class="question">Can oscillators coordinate a gait without a controller?</p>
+        <p>A robot with several legs needs its actuators to move in sequence. Without electronics this has been hard: ring oscillators work only with an odd number of actuators, and fluidic relaxation oscillators, which are not bistable, lose more energy.</p>
+        <p>Here two oscillators are linked in a loop, the outlets of each one's valve feeding the chambers of the other, so each oscillator's chambers are driven by its partner's valve and the two take turns. Within one oscillator, the two chambers fill half a cycle apart; on the same side, the chambers of the two oscillators fill a quarter of a cycle apart. Linking them takes no change to the oscillators, only to the tubes, so in principle any number can be linked; the authors also ran a loop of three.</p>
+      </div>
+      <figure class="wide clip"><video id="clip-cascade" class="loop" muted loop playsinline controls preload="none" poster="clip-cascade.jpg" width="1280" height="720" aria-label="Three oscillators side by side on a breadboard; red and blue squares beside each one change as the oscillators switch one after another."><source src="clip-cascade.mp4" type="video/mp4"></video><figcaption class="figure-foot"><span>Three oscillators linked in a loop on a breadboard. The squares mark chambers at the supply pressure (red) or open to the air (blue); one oscillator switches at a time, through six states. 4× slow motion.</span><button type="button" class="motion" data-video="clip-cascade">Play clip</button></figcaption></figure>
+      <div class="reading">
+        <p>In the crawling robot, the active joint of one oscillator is fixed to the body of the other, whose passive joint drives the front leg. Each oscillator has a pair of feet with sharp, backward-angled corners. The gait cycles through four states, and the robot crawls at <span style="white-space:nowrap">0.8 BL/s</span> with its oscillators at <span style="white-space:nowrap">4 Hz</span>. Among the pneumatic crawlers the authors compare, including some with wheels and electric valves, it is the fastest.</p>
+      </div>
+      <figure class="wide clip"><video id="clip-crawl" class="loop" muted loop playsinline controls preload="none" poster="clip-crawl.jpg" width="1280" height="324" aria-label="Top view on dark fabric: the crawling robot, with two oscillators and white legs, crawls from left to right, trailing its air tube."><source src="clip-crawl.mp4" type="video/mp4"></video><figcaption class="figure-foot"><span>The crawling robot, driven by two linked oscillators, crosses the frame trailing its air-supply tube. Real time.</span><button type="button" class="motion" data-video="clip-crawl">Play clip</button></figcaption></figure>
+      <figure class="reading paper-fig"><a class="zoom" href="fig-5-crawling.webp"><img src="fig-5-crawling.webp" width="1768" height="1136" loading="lazy" alt="Figure 5e: top-view photos of the crawling robot at 0, 2 and 4 seconds, moving to the right, labelled 0.8 body lengths per second at 4 Hz."></a><figcaption><span style="white-space:nowrap">Fig. 5e</span>: the robot at 0, 2 and <span style="white-space:nowrap">4 s</span> under a constant supply pressure.</figcaption></figure>
+    </section>
+
+    <section class="section" id="swimming">
+      <div class="reading">
+        <p class="eyebrow">06 / Swimming robot</p>
+        <h2>Steering<br><em>by phase.</em></h2>
+        <p class="question">How do you steer a robot with no controller?</p>
+        <p>Changing a robot's course usually means changing its stroke, which takes a microcontroller. Here the oscillator's phase is set mechanically. An auxiliary beam is pinned to the passive joint at one end and clamped at a fixed angle γ at the other. At <span style="white-space:nowrap">γ = 90°</span> it bends the same way in both directions, and the active joint takes as long to swing one way as the other (<span style="white-space:nowrap">T1 = T2</span>). Clamped above or below 90°, it adds a different torque in each direction, so one swing takes longer than the other.</p>
+      </div>
+      <div class="wide trio">
+        <figure class="clip"><video id="clip-gamma-90" class="loop" muted loop playsinline controls preload="none" poster="clip-gamma-90.jpg" width="960" height="650" aria-label="The oscillator with its auxiliary beam at gamma equal to 90 degrees; an inset plots the active joint's angle, with equal times T1 and T2."><source src="clip-gamma-90.mp4" type="video/mp4"></video><figcaption class="figure-foot"><span><span style="white-space:nowrap">γ = 90°</span>: symmetric strokes, <span style="white-space:nowrap">T1 = T2</span>. Real time.</span><button type="button" class="motion" data-video="clip-gamma-90">Play clip</button></figcaption></figure>
+        <figure class="clip"><video id="clip-gamma-over" class="loop" muted loop playsinline controls preload="none" poster="clip-gamma-over.jpg" width="960" height="650" aria-label="The oscillator with its auxiliary beam above 90 degrees; the inset shows T1 longer than T2."><source src="clip-gamma-over.mp4" type="video/mp4"></video><figcaption class="figure-foot"><span><span style="white-space:nowrap">γ &gt; 90°</span>: asymmetric strokes, <span style="white-space:nowrap">T1 &gt; T2</span>. Real time.</span><button type="button" class="motion" data-video="clip-gamma-over">Play clip</button></figcaption></figure>
+        <figure class="clip"><video id="clip-gamma-under" class="loop" muted loop playsinline controls preload="none" poster="clip-gamma-under.jpg" width="960" height="650" aria-label="The oscillator with its auxiliary beam below 90 degrees; the inset shows T1 shorter than T2."><source src="clip-gamma-under.mp4" type="video/mp4"></video><figcaption class="figure-foot"><span><span style="white-space:nowrap">γ &lt; 90°</span>: asymmetric strokes, <span style="white-space:nowrap">T1 &lt; T2</span>. Real time.</span><button type="button" class="motion" data-video="clip-gamma-under">Play clip</button></figcaption></figure>
+      </div>
+      <p class="wide strip-caption">One oscillator with its auxiliary beam clamped at three angles; each inset plots the active joint's angle over time.</p>
+      <div class="reading">
+        <p>The swimming robot carries a phase-tunable oscillator, a CO₂ gas cylinder as its air supply, a fin on the active joint and a 3D-printed container for buoyancy, so it needs no tether. A clamp on the auxiliary beam serves as a knob for setting γ by hand. At <span style="white-space:nowrap">γ = 90°</span> the robot swims straight, oscillating at <span style="white-space:nowrap">2.3 Hz</span>, at <span style="white-space:nowrap">0.6 BL/s</span> on about <span style="white-space:nowrap">50 kPa</span>; at 100° it turns left and at 80° right, both at <span style="white-space:nowrap">2 Hz</span> and <span style="white-space:nowrap">0.5 BL/s</span>. At <span style="white-space:nowrap">γ = 110°</span> it turns through more than 180° within a radius of <span style="white-space:nowrap">260 mm</span>, less than <span style="white-space:nowrap">1.5 body lengths</span>.</p>
+      </div>
+      <figure class="wide clip"><video id="clip-tank" class="loop" muted loop playsinline controls preload="none" poster="clip-tank.jpg" width="1280" height="720" aria-label="Five top views of the swimming robot in a dark tank, side by side; yellow lines trace a tight left turn, a wide left turn, a straight path, a wide right turn and a tight right turn."><source src="clip-tank.mp4" type="video/mp4"></video><figcaption class="figure-foot"><span>Five runs in the tank, seen from above, at <span style="white-space:nowrap">γ = 110°</span>, 100°, 90°, 80° and 70°: tight and wide left turns, straight, wide and tight right turns, each traced in yellow. Real time.</span><button type="button" class="motion" data-video="clip-tank">Play clip</button></figcaption></figure>
+      <figure class="wide paper-fig"><a class="zoom" href="fig-6-swimming.webp"><img src="fig-6-swimming.webp" width="2000" height="1034" loading="lazy" alt="Figure 6d: three composite top views of the swimming robot every 3 seconds, turning left at gamma 100 degrees, going straight at 90 degrees and turning right at 80 degrees."></a><figcaption><span style="white-space:nowrap">Fig. 6d</span>: left turn (<span style="white-space:nowrap">γ = 100°</span>), straight (90°) and right turn (80°), with the robot shown every <span style="white-space:nowrap">3 s</span>.</figcaption></figure>
+      <div class="wide stats">
+        <div class="stat"><b>0.6 BL/s</b><span>Swimming straight, at 2.3&nbsp;Hz</span></div>
+        <div class="stat"><b>0.5 BL/s</b><span>Turning left or right, at 2&nbsp;Hz</span></div>
+        <div class="stat"><b>260 mm</b><span>Radius of a turn through more than 180°, γ&nbsp;=&nbsp;110°</span></div>
+      </div>
+    </section>
+
+    <section class="section soft" id="qa">
+      <div class="reading">
+        <p class="eyebrow">Questions &amp; answers</p>
+        <h2>Common questions.</h2>
+        <div class="qa">
+          <details><summary>Why not use solenoid valves?</summary><p>Solenoid valves and a microcontroller need continuous electrical power and a clock signal, which makes a robot bulky and complex and limits it in strong electromagnetic fields or where electricity is scarce. The oscillator needs only a constant pressure supply. Even so, the jumping robot runs more than twice as fast as pneumatic robots that use electromagnetic valves.</p></details>
+          <details><summary>What sets the frequency?</summary><p>The supply pressure and the beam: its normalized length λ and its bending stiffness EI. The frequency rises with pressure up to about <span style="white-space:nowrap">80 kPa</span> and peaks at about <span style="white-space:nowrap">120–150 kPa</span>, where the soft valve starts to block part of the airflow. A stiffer beam needs more torque to snap and lowers the frequency. The circuit model predicts these trends.</p></details>
+          <details><summary>Why “hybrid”?</summary><p>Because it combines three levels of stiffness. Fabric that bends but does not stretch puts the pressure into rotation; the purely elastic carbon-fiber beam snaps in <span style="white-space:nowrap">9 ms</span>; rigid 3D-printed parts carry motion and force efficiently. The authors call this a soft-elastic-rigid coupling.</p></details>
+          <details><summary>How many oscillators can be linked?</summary><p>In principle any number. Linking needs no change to the oscillators, only different tube connections, whereas ring oscillators need an odd number of stages. The paper shows two oscillators driving the crawling robot and a loop of three on a breadboard.</p></details>
+          <details><summary>Does the swimmer steer itself?</summary><p>No. The angle γ of the auxiliary beam is set by hand, with a clamp that serves as a knob, and the robot then keeps the course that γ sets. It carries its own CO₂ cylinder, so it needs no tether.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="paper">
+      <div class="reading">
+        <p class="eyebrow">Paper &amp; authors</p>
+        <h2>Soft, elastic and rigid,<br><em>in one oscillator.</em></h2>
+        <p class="paper-title">A non-electrical pneumatic hybrid oscillator for high-frequency multimodal robotic locomotion</p>
+        <p><span style="white-space:nowrap">Genliang Chen<sup>†*</sup>,</span> <span style="white-space:nowrap">Yongzhou Long<sup>†</sup>,</span> Siyue Yao, <span style="white-space:nowrap">Shujie Tang</span>, <span style="white-space:nowrap">Junjie Luo</span>, <span style="white-space:nowrap">Hao Wang</span>, <span style="white-space:nowrap">Zhuang Zhang<sup>*</sup>,</span> and <span style="white-space:nowrap">Hanqing Jiang<sup>*</sup>.</span></p>
+        <p class="small">† Equal contribution. * Corresponding authors: Genliang Chen, Zhuang Zhang and Hanqing Jiang.</p>
+        <p class="venue">Nature Communications, volume 16, article 1449, 2025. Received 15 August 2024; accepted 25 January 2025; published online 7 February 2025.</p>
+        <div class="paper-links"><a class="text-link" href="https://doi.org/10.1038/s41467-025-56704-1">Read the paper at doi.org/10.1038/s41467-025-56704-1 ↗</a><a class="text-link" href="https://doi.org/10.5281/zenodo.14431831">CAD files of the 3D-printed parts, on Zenodo ↗</a></div>
+        <details class="evidence citation" id="citation">
+          <summary>Citation / BibTeX</summary>
+          <div class="citation-actions"><button class="citation-copy" id="copy-bibtex" type="button" aria-describedby="citation-status" hidden>Copy BibTeX</button><a href="citation.bib" download>Download .bib ↓</a></div>
+          <p class="citation-status" id="citation-status" role="status" aria-live="polite"></p>
+          <pre tabindex="0" aria-label="BibTeX citation"><code id="bibtex">@article{chen2025oscillator,
+  title     = {A non-electrical pneumatic hybrid oscillator for high-frequency multimodal robotic locomotion},
+  author    = {Chen, Genliang and Long, Yongzhou and Yao, Siyue and Tang, Shujie and Luo, Junjie and Wang, Hao and Zhang, Zhuang and Jiang, Hanqing},
+  journal   = {Nature Communications},
+  volume    = {16},
+  number    = {1},
+  pages     = {1449},
+  year      = {2025},
+  publisher = {Springer Science and Business Media LLC},
+  doi       = {10.1038/s41467-025-56704-1}
+}</code></pre>
+        </details>
+        <details class="evidence"><summary>Full affiliations</summary><ol class="affiliation-list"><li>State Key Laboratory of Mechanical Systems and Vibration, Shanghai Jiao Tong University, Shanghai, China</li><li>Shanghai Key Laboratory of Digital Manufacturing for Thin-Walled Structures, Shanghai Jiao Tong University, Shanghai, China</li><li>Meta Robotics Institute, Shanghai Jiao Tong University, Shanghai, China</li><li>Academy for Engineering and Technology, Fudan University, Shanghai, China</li><li>School of Engineering, Westlake University, Hangzhou, Zhejiang, China</li><li>Research Center for Industries of the Future, Westlake University, Hangzhou, Zhejiang, China</li></ol></details>
+      </div>
+    </section>
+
+    <section class="section soft" id="video">
+      <div class="reading">
+        <p class="eyebrow">Supplementary movies</p>
+        <h2>Watch all ten movies.</h2>
+        <p><span style="white-space:nowrap">Movies 1–4</span> show the oscillator in renders and animations, <span style="white-space:nowrap">Movie 5</span> films it at <span style="white-space:nowrap">51 Hz</span>, and <span style="white-space:nowrap">Movies 6–10</span> show the three robots and the phase tuning.</p>
+      </div>
+      <div class="wide">
+        <div class="tabs" role="tablist" aria-label="Supplementary movies">
+          <button id="tab-movie-01" role="tab" aria-selected="true" aria-controls="panel-movie-01">1 · Design</button>
+          <button id="tab-movie-02" role="tab" aria-selected="false" aria-controls="panel-movie-02">2 · Airflow</button>
+          <button id="tab-movie-03" role="tab" aria-selected="false" aria-controls="panel-movie-03">3 · Snap-through</button>
+          <button id="tab-movie-04" role="tab" aria-selected="false" aria-controls="panel-movie-04">4 · Principle</button>
+          <button id="tab-movie-05" role="tab" aria-selected="false" aria-controls="panel-movie-05">5 · 51 Hz</button>
+          <button id="tab-movie-06" role="tab" aria-selected="false" aria-controls="panel-movie-06">6 · Jumping</button>
+          <button id="tab-movie-07" role="tab" aria-selected="false" aria-controls="panel-movie-07">7 · Crawling</button>
+          <button id="tab-movie-08" role="tab" aria-selected="false" aria-controls="panel-movie-08">8 · Loop of three</button>
+          <button id="tab-movie-09" role="tab" aria-selected="false" aria-controls="panel-movie-09">9 · Phase</button>
+          <button id="tab-movie-10" role="tab" aria-selected="false" aria-controls="panel-movie-10">10 · Swimming</button>
+        </div>
+        <div class="tab-panel" id="panel-movie-01" role="tabpanel" aria-labelledby="tab-movie-01">
+          <video id="video-movie-01" controls playsinline preload="none" poster="video-movie-01.jpg" width="1280" height="720" aria-label="Supplementary Movie 1: a render of the oscillator turning, then its parts labelled one by one."><source src="video-movie-01.mp4" type="video/mp4">Your browser does not support embedded video. <a href="video-movie-01.mp4">Download the video</a>.</video>
+          <p><b>Supplementary Movie 1:</b> Design of the pneumatic hybrid oscillator (PHO). A render of the oscillator turning, then its parts labelled one by one.</p>
+          <div class="chapters" aria-label="Chapters of Movie 1">
+            <button type="button" data-target="video-movie-01" data-time="5"><span>0:05</span>The oscillator</button>
+            <button type="button" data-target="video-movie-01" data-time="15"><span>0:15</span>Chambers and joints</button>
+            <button type="button" data-target="video-movie-01" data-time="25"><span>0:25</span>Beam and rocker</button>
+            <button type="button" data-target="video-movie-01" data-time="47.5"><span>0:47</span>Switch valve</button>
+            <button type="button" data-target="video-movie-01" data-time="65"><span>1:05</span>Tubes and caps</button>
+            <button type="button" data-target="video-movie-01" data-time="80"><span>1:20</span>Assembled</button>
+          </div>
+        </div>
+        <div class="tab-panel" id="panel-movie-02" role="tabpanel" aria-labelledby="tab-movie-02">
+          <video id="video-movie-02" controls playsinline preload="none" poster="video-movie-02.jpg" width="1280" height="720" aria-label="Supplementary Movie 2: an animation of the airflow through the oscillator, half a cycle at a time, then full cycles."><source src="video-movie-02.mp4" type="video/mp4">Your browser does not support embedded video. <a href="video-movie-02.mp4">Download the video</a>.</video>
+          <p><b>Supplementary Movie 2:</b> Animation demonstration of the PHO. The airflow through the chambers and the valve, the rocker's switch and the snap-through, half a cycle at a time and then in full cycles.</p>
+          <div class="chapters" aria-label="Chapters of Movie 2">
+            <button type="button" data-target="video-movie-02" data-time="4.3"><span>0:04</span>One chamber fills</button>
+            <button type="button" data-target="video-movie-02" data-time="13.5"><span>0:13</span>The active joint turns</button>
+            <button type="button" data-target="video-movie-02" data-time="18.5"><span>0:18</span>Snap and switch</button>
+            <button type="button" data-target="video-movie-02" data-time="22.5"><span>0:22</span>The other half-cycle</button>
+            <button type="button" data-target="video-movie-02" data-time="35"><span>0:35</span>Full cycles</button>
+          </div>
+        </div>
+        <div class="tab-panel" id="panel-movie-03" role="tabpanel" aria-labelledby="tab-movie-03">
+          <video id="video-movie-03" controls playsinline preload="none" poster="video-movie-03.jpg" width="1280" height="444" aria-label="Supplementary Movie 3: an animation of the beam snapping between its two stable shapes, then the same with plots of torque, energy and joint angles."><source src="video-movie-03.mp4" type="video/mp4">Your browser does not support embedded video. <a href="video-movie-03.mp4">Download the video</a>.</video>
+          <p><b>Supplementary Movie 3:</b> Snap-through buckling behavior of the elastic beam. The beam between its two joints, its snap-through, and plots of torque, elastic energy and the two joint angles.</p>
+          <div class="chapters" aria-label="Chapters of Movie 3">
+            <button type="button" data-target="video-movie-03" data-time="4"><span>0:04</span>Beam and joints</button>
+            <button type="button" data-target="video-movie-03" data-time="10"><span>0:10</span>Snap-through</button>
+            <button type="button" data-target="video-movie-03" data-time="26"><span>0:26</span>Torque and energy</button>
+          </div>
+        </div>
+        <div class="tab-panel" id="panel-movie-04" role="tabpanel" aria-labelledby="tab-movie-04">
+          <video id="video-movie-04" controls playsinline preload="none" poster="video-movie-04.jpg" width="1280" height="442" aria-label="Supplementary Movie 4: a schematic in which the two chambers fill in turn as the valve switches."><source src="video-movie-04.mp4" type="video/mp4">Your browser does not support embedded video. <a href="video-movie-04.mp4">Download the video</a>.</video>
+          <p><b>Supplementary Movie 4:</b> Working principle of the PHO. A schematic of the chambers, the beam and the valve: each chamber fills in turn as the valve switches.</p>
+          <div class="chapters" aria-label="Chapters of Movie 4">
+            <button type="button" data-target="video-movie-04" data-time="5"><span>0:05</span>Chamber A fills</button>
+            <button type="button" data-target="video-movie-04" data-time="10.5"><span>0:10</span>The valve switches</button>
+            <button type="button" data-target="video-movie-04" data-time="15.5"><span>0:15</span>Chamber B fills</button>
+            <button type="button" data-target="video-movie-04" data-time="20.5"><span>0:20</span>Continuous cycles</button>
+          </div>
+        </div>
+        <div class="tab-panel" id="panel-movie-05" role="tabpanel" aria-labelledby="tab-movie-05">
+          <video id="video-movie-05" controls playsinline preload="none" poster="video-movie-05.jpg" width="822" height="720" style="max-width:822px; margin:0 auto" aria-label="Supplementary Movie 5: the oscillator under violet light as the pressure rises and the frequency climbs to 51 Hz, then the same oscillation at 30 times slow motion."><source src="video-movie-05.mp4" type="video/mp4">Your browser does not support embedded video. <a href="video-movie-05.mp4">Download the video</a>.</video>
+          <p><b>Supplementary Movie 5:</b> High-frequency oscillation of the PHO. Under violet light, the frequency climbs to <span style="white-space:nowrap">51 Hz</span> as the pressure rises to <span style="white-space:nowrap">180 kPa</span>; then the oscillation at 30× slow motion.</p>
+          <div class="chapters" aria-label="Chapters of Movie 5">
+            <button type="button" data-target="video-movie-05" data-time="4.5"><span>0:04</span>Rising pressure, real time</button>
+            <button type="button" data-target="video-movie-05" data-time="28.7"><span>0:28</span>30× slow motion</button>
+          </div>
+        </div>
+        <div class="tab-panel" id="panel-movie-06" role="tabpanel" aria-labelledby="tab-movie-06">
+          <video id="video-movie-06" controls playsinline preload="none" poster="video-movie-06.jpg" width="1280" height="720" aria-label="Supplementary Movie 6: the jumping robot held by a gloved hand swings its legs, then three robots run side by side at 14, 17 and 28 Hz."><source src="video-movie-06.mp4" type="video/mp4">Your browser does not support embedded video. <a href="video-movie-06.mp4">Download the video</a>.</video>
+          <p><b>Supplementary Movie 6:</b> High-speed kangaroo robot. The robot held by hand with its legs swinging, then three runs at 14, 17 and <span style="white-space:nowrap">28 Hz</span>, in real time and in 8× slow motion.</p>
+          <div class="chapters" aria-label="Chapters of Movie 6">
+            <button type="button" data-target="video-movie-06" data-time="4"><span>0:04</span>Held by hand</button>
+            <button type="button" data-target="video-movie-06" data-time="12"><span>0:12</span>4× slow motion</button>
+            <button type="button" data-target="video-movie-06" data-time="19.3"><span>0:19</span>Three runs</button>
+            <button type="button" data-target="video-movie-06" data-time="25.3"><span>0:25</span>8× slow motion</button>
+          </div>
+        </div>
+        <div class="tab-panel" id="panel-movie-07" role="tabpanel" aria-labelledby="tab-movie-07">
+          <video id="video-movie-07" controls playsinline preload="none" poster="video-movie-07.jpg" width="1280" height="720" aria-label="Supplementary Movie 7: the crawling robot seen from above crawls across the frame, in real time and then in 4 times slow motion."><source src="video-movie-07.mp4" type="video/mp4">Your browser does not support embedded video. <a href="video-movie-07.mp4">Download the video</a>.</video>
+          <p><b>Supplementary Movie 7:</b> Cascaded-loop crawling robot. The robot from above, crawling in real time and in 4× slow motion.</p>
+          <div class="chapters" aria-label="Chapters of Movie 7">
+            <button type="button" data-target="video-movie-07" data-time="4.3"><span>0:04</span>The robot</button>
+            <button type="button" data-target="video-movie-07" data-time="5.9"><span>0:05</span>Real time</button>
+            <button type="button" data-target="video-movie-07" data-time="13.9"><span>0:13</span>4× slow motion</button>
+          </div>
+        </div>
+        <div class="tab-panel" id="panel-movie-08" role="tabpanel" aria-labelledby="tab-movie-08">
+          <video id="video-movie-08" controls playsinline preload="none" poster="video-movie-08.jpg" width="1280" height="720" aria-label="Supplementary Movie 8: a schematic of three linked oscillators, then the three on a breadboard switching one after another."><source src="video-movie-08.mp4" type="video/mp4">Your browser does not support embedded video. <a href="video-movie-08.mp4">Download the video</a>.</video>
+          <p><b>Supplementary Movie 8:</b> Cascade-loop of three PHOs. A schematic of the loop, then the three oscillators on a breadboard in real time and in 4× slow motion.</p>
+          <div class="chapters" aria-label="Chapters of Movie 8">
+            <button type="button" data-target="video-movie-08" data-time="4.9"><span>0:04</span>Schematic</button>
+            <button type="button" data-target="video-movie-08" data-time="10.5"><span>0:10</span>Real time</button>
+            <button type="button" data-target="video-movie-08" data-time="21.9"><span>0:21</span>4× slow motion</button>
+          </div>
+        </div>
+        <div class="tab-panel" id="panel-movie-09" role="tabpanel" aria-labelledby="tab-movie-09">
+          <video id="video-movie-09" controls playsinline preload="none" poster="video-movie-09.jpg" width="1280" height="720" aria-label="Supplementary Movie 9: the oscillator with its auxiliary beam at three angles, each with a plot of the active joint's angle."><source src="video-movie-09.mp4" type="video/mp4">Your browser does not support embedded video. <a href="video-movie-09.mp4">Download the video</a>.</video>
+          <p><b>Supplementary Movie 9:</b> Phase tunability of the PHO. The oscillator with its auxiliary beam at <span style="white-space:nowrap">γ = 90°</span>, above 90° and below 90°.</p>
+          <div class="chapters" aria-label="Chapters of Movie 9">
+            <button type="button" data-target="video-movie-09" data-time="3.9"><span>0:03</span>γ = 90°</button>
+            <button type="button" data-target="video-movie-09" data-time="13.5"><span>0:13</span>γ &gt; 90°</button>
+            <button type="button" data-target="video-movie-09" data-time="22.7"><span>0:22</span>γ &lt; 90°</button>
+          </div>
+        </div>
+        <div class="tab-panel" id="panel-movie-10" role="tabpanel" aria-labelledby="tab-movie-10">
+          <video id="video-movie-10" controls playsinline preload="none" poster="video-movie-10.jpg" width="1280" height="720" aria-label="Supplementary Movie 10: the swimming robot on a black drape, hands opening its valve, its fin flapping, then five runs in a tank seen from above."><source src="video-movie-10.mp4" type="video/mp4">Your browser does not support embedded video. <a href="video-movie-10.mp4">Download the video</a>.</video>
+          <p><b>Supplementary Movie 10:</b> Course-tunable untethered swimming robot. The robot and its parts, the valve opened by hand, the fin flapping, then five runs in a tank at <span style="white-space:nowrap">γ = 110°</span> to 70°.</p>
+          <div class="chapters" aria-label="Chapters of Movie 10">
+            <button type="button" data-target="video-movie-10" data-time="4.6"><span>0:04</span>The robot</button>
+            <button type="button" data-target="video-movie-10" data-time="9.3"><span>0:09</span>Opening the valve</button>
+            <button type="button" data-target="video-movie-10" data-time="14.3"><span>0:14</span>Fin flapping</button>
+            <button type="button" data-target="video-movie-10" data-time="23.9"><span>0:23</span>Tight left turn</button>
+            <button type="button" data-target="video-movie-10" data-time="39.5"><span>0:39</span>Wide left turn</button>
+            <button type="button" data-target="video-movie-10" data-time="50.5"><span>0:50</span>Straight</button>
+            <button type="button" data-target="video-movie-10" data-time="56.5"><span>0:56</span>Wide right turn</button>
+            <button type="button" data-target="video-movie-10" data-time="67"><span>1:07</span>Tight right turn</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section related" id="related">
+      <div class="wide">
+        <p class="eyebrow">Related projects</p>
+        <ul class="related-list">
+          <li><a href="https://ebug-locomotion.github.io/"><b>EBUG</b><span>One elastic beam on each side ripples to crawl and snaps through to jump · IROS 2026</span></a></li>
+          <li><a href="https://rigid-flexible-leg.github.io/"><b>Rigid-flexible hybrid leg</b><span>A spring-steel link that senses foot contact · MMT 2025</span></a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <a href="#paper">Paper &amp; authors ↑</a>
+  </footer>
+  <dialog id="lightbox" aria-label="Enlarged figure"><button class="close-lightbox" type="button" aria-label="Close enlarged figure">×</button><img alt=""></dialog>
+<script>
+// Shared behavior for Siyue Yao's project pages: looping clips that play only while on screen, tabs,
+// chapter buttons, links that open <details>, BibTeX copy, the figure lightbox and section highlighting.
+// No dependencies. Without JavaScript every tab panel stays visible and clips keep native controls.
+(() => {
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  /* Looping clips */
+  const loops = [...document.querySelectorAll("video.loop")];
+  const manualPause = new WeakSet();
+  const inView = new WeakSet();
+  const buttonFor = (video) => document.querySelector(`[data-video="${video.id}"]`);
+  function update(video) {
+    const button = buttonFor(video);
+    if (!button) return;
+    button.textContent = video.paused ? "Play clip" : "Pause clip";
+    button.setAttribute("aria-pressed", String(!video.paused));
+  }
+  function play(video) {
+    const promise = video.play();
+    if (promise) promise.catch(() => update(video));
+  }
+  const mayAutoplay = (video) => inView.has(video) && !manualPause.has(video) && !reduced.matches && !document.hidden;
+  loops.forEach((video) => {
+    video.muted = true;
+    video.removeAttribute("controls");
+    video.addEventListener("play", () => update(video));
+    video.addEventListener("pause", () => update(video));
+    update(video);
+    const button = buttonFor(video);
+    if (button) {
+      button.addEventListener("click", () => {
+        if (video.paused) { manualPause.delete(video); play(video); }
+        else { manualPause.add(video); video.pause(); }
+      });
+    }
+  });
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver((entries) => entries.forEach(({ target, isIntersecting }) => {
+      if (isIntersecting) { inView.add(target); if (mayAutoplay(target)) play(target); }
+      else { inView.delete(target); target.pause(); }
+    }), { threshold: 0.3 });
+    loops.forEach((video) => observer.observe(video));
+  }
+  const resync = () => loops.forEach((video) => {
+    if (mayAutoplay(video)) play(video);
+    else if (document.hidden || reduced.matches) video.pause();
+  });
+  document.addEventListener("visibilitychange", resync);
+  reduced.addEventListener("change", resync);
+
+  /* Full videos: only one plays at a time */
+  const fullVideos = [...document.querySelectorAll("video:not(.loop)")];
+  fullVideos.forEach((video) => video.addEventListener("play", () => {
+    fullVideos.forEach((other) => { if (other !== video) other.pause(); });
+  }));
+
+  /* Tabs */
+  document.querySelectorAll('[role="tablist"]').forEach((list) => {
+    const tabs = [...list.querySelectorAll('[role="tab"]')];
+    if (!tabs.length) return;
+    const panelOf = (tab) => document.getElementById(tab.getAttribute("aria-controls"));
+    function select(selected, moveFocus = false) {
+      tabs.forEach((tab) => {
+        const active = tab === selected;
+        tab.setAttribute("aria-selected", String(active));
+        tab.tabIndex = active ? 0 : -1;
+        const panel = panelOf(tab);
+        if (!panel) return;
+        panel.hidden = !active;
+        if (!active) panel.querySelectorAll("video").forEach((video) => video.pause());
+      });
+      if (moveFocus) selected.focus();
+    }
+    tabs.forEach((tab, index) => {
+      tab.addEventListener("click", () => select(tab));
+      tab.addEventListener("keydown", (event) => {
+        const target = { ArrowRight: (index + 1) % tabs.length, ArrowLeft: (index + tabs.length - 1) % tabs.length, Home: 0, End: tabs.length - 1 }[event.key];
+        if (target === undefined) return;
+        event.preventDefault();
+        select(tabs[target], true);
+      });
+    });
+    select(tabs.find((tab) => tab.getAttribute("aria-selected") === "true") || tabs[0]);
+  });
+
+  /* Chapter buttons: <button data-target="video-id" data-time="12.4"> */
+  document.querySelectorAll("button[data-time][data-target]").forEach((button) => button.addEventListener("click", () => {
+    const video = document.getElementById(button.dataset.target);
+    if (!video) return;
+    const seek = () => { video.currentTime = Number(button.dataset.time); play(video); };
+    if (video.readyState >= 1) seek();
+    else {
+      video.addEventListener("loadedmetadata", seek, { once: true });
+      video.preload = "metadata";
+      video.load();
+    }
+    video.scrollIntoView({ block: "center", behavior: reduced.matches ? "instant" : "smooth" });
+  }));
+
+  /* Links to a <details> open it (e.g. the BibTeX button) */
+  const openDetails = (hash) => {
+    if (!hash || hash.length < 2) return;
+    const target = document.getElementById(decodeURIComponent(hash.slice(1)));
+    if (target instanceof HTMLDetailsElement) target.open = true;
+  };
+  document.querySelectorAll('a[href^="#"]').forEach((link) => link.addEventListener("click", () => openDetails(link.hash)));
+  openDetails(window.location.hash);
+
+  /* BibTeX copy */
+  const copy = document.getElementById("copy-bibtex");
+  const bibtex = document.getElementById("bibtex");
+  const status = document.getElementById("citation-status");
+  if (copy && bibtex && status) {
+    copy.hidden = false;
+    copy.addEventListener("click", async () => {
+      status.textContent = "";
+      try {
+        if (!navigator.clipboard || !navigator.clipboard.writeText) throw new Error("Clipboard unavailable");
+        await navigator.clipboard.writeText(`${bibtex.textContent.trim()}\n`);
+        status.textContent = "BibTeX copied to clipboard.";
+      } catch {
+        status.textContent = "Could not copy automatically. Select the BibTeX below and copy it, or download the .bib file.";
+      }
+    });
+  }
+
+  /* Figure lightbox */
+  const lightbox = document.getElementById("lightbox");
+  if (lightbox && typeof lightbox.showModal === "function") {
+    const image = lightbox.querySelector("img");
+    document.querySelectorAll("a.zoom").forEach((link) => link.addEventListener("click", (event) => {
+      event.preventDefault();
+      image.src = link.href;
+      image.alt = link.querySelector("img")?.alt || "";
+      lightbox.showModal();
+      document.body.style.overflow = "hidden";
+    }));
+    lightbox.querySelector("button").addEventListener("click", () => lightbox.close());
+    lightbox.addEventListener("click", (event) => { if (event.target === lightbox) lightbox.close(); });
+    lightbox.addEventListener("close", () => { document.body.style.overflow = ""; });
+  }
+
+  /* Section nav highlight */
+  const navLinks = [...document.querySelectorAll(".section-nav a")];
+  if (navLinks.length && "IntersectionObserver" in window) {
+    const observer = new IntersectionObserver((entries) => entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      navLinks.forEach((link) => link.classList.toggle("active", link.hash === `#${entry.target.id}`));
+    }), { rootMargin: "-20% 0px -65% 0px" });
+    navLinks.forEach((link) => {
+      const section = document.getElementById(decodeURIComponent(link.hash.slice(1)));
+      if (section) observer.observe(section);
+    });
+  }
+})();
+</script>
+</body>
+</html>
