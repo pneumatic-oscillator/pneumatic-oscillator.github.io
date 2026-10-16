@@ -23,7 +23,7 @@
   <meta name="citation_publisher" content="Springer Science and Business Media LLC">
   <meta name="citation_doi" content="10.1038/s41467-025-56704-1">
   <meta property="og:title" content="Pneumatic Hybrid Oscillator">
-  <meta property="og:description" content="Air in, rhythm out: a 51 Hz pneumatic oscillator with no electronics drives jumping, crawling and swimming robots.">
+  <meta property="og:description" content="Snap-through and kinked tubes: a 51 Hz pneumatic oscillator with no electronics drives jumping, crawling and swimming robots.">
   <meta property="og:image" content="https://pneumatic-oscillator.github.io/hero.jpg">
   <meta property="og:url" content="https://pneumatic-oscillator.github.io/">
   <link rel="canonical" href="https://pneumatic-oscillator.github.io/">
@@ -209,38 +209,6 @@ figcaption { font-size: 13px; line-height: 1.65; color: var(--muted); }
 .data-table thead th { border-bottom-color: #cacfc3; font-size: 12px; font-weight: 600; line-height: 1.4; color: var(--muted); vertical-align: bottom; }
 .data-table tbody th { font-weight: 500; }
 .table-fig figcaption { margin-top: 12px; text-align: center; }
-/* .grouped: one tbody per group, its name in a th spanning the group's rows (scope="rowgroup"); lines only between
-   groups. .fit: only as wide as the columns, centred. */
-.data-table.grouped tbody tr > * { padding-top: 6px; padding-bottom: 6px; border-bottom: 0; }
-.data-table.grouped tbody tr:first-child > * { padding-top: 14px; }
-.data-table.grouped tbody tr:last-child > * { padding-bottom: 14px; }
-.data-table.grouped tbody + tbody tr:first-child > * { border-top: 1px solid var(--line); }
-.data-table.grouped tbody th[rowspan] { font-weight: 600; vertical-align: top; }
-.data-table.grouped tbody td:first-of-type { padding-left: 14px; color: var(--muted); text-align: right; }
-.data-table.fit { width: auto; margin: 0 auto; }
-.data-table.fit th, .data-table.fit td { padding-right: 26px; padding-left: 26px; }
-.data-table.fit th:first-child, .data-table.fit td:first-child { padding-left: 0; }
-.data-table.fit th:last-child, .data-table.fit td:last-child { padding-right: 0; }
-/* A table with color blocks of the same shares beside it (.heatmap, e.g. a classifier's results). Both are .data-table
-   with the same header rows ("Identified as" over the classes: th.axis), so their rows line up; the rows are taller
-   here, so the blocks come out square. A block is the palette's light end mixed toward its dark end by its share
-   (--v, 0 to 1), with rounded corners and a gap around it; th.axis-rows titles the rows, turned to read upward. */
-.table-pair { display: grid; grid-template-columns: minmax(0, 470px) auto; justify-content: center; align-items: start; gap: 64px; }
-.table-pair .data-table tbody th, .table-pair .data-table tbody td { padding-top: 15px; padding-bottom: 15px; }
-.data-table thead tr:not(:last-child) th { padding-bottom: 6px; }
-.data-table thead th:empty { border-bottom-color: transparent; }
-.data-table thead th.axis { font-size: 11px; letter-spacing: 0.08em; text-align: center; text-transform: uppercase; }
-.heatmap { --hm-low: #e9f2f5; --hm-high: #14527a; width: auto; }
-.heatmap th, .heatmap td, .heatmap thead th { border-bottom-color: transparent; }
-.heatmap thead th + th { padding-right: 0; padding-left: 0; text-align: center; }
-.heatmap tbody th:not(.axis-rows) { padding-right: 10px; padding-left: 0; font-size: 12px; line-height: 21px; color: var(--muted); text-align: right; }
-/* The rows' title is ordinary text turned 90° in a column of its own: vertical writing-mode in a narrow cell wraps and
-   overflows in Safari. */
-.heatmap th.axis-rows { position: relative; width: 28px; padding: 0; }
-.heatmap th.axis-rows span { position: absolute; top: 50%; left: 50%; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; line-height: 1.4; color: var(--muted); text-transform: uppercase; white-space: nowrap; transform: translate(-50%, -50%) rotate(-90deg); }
-.heatmap td { position: relative; z-index: 0; width: 52px; padding-right: 0; padding-left: 0; font-size: 13px; font-weight: 500; line-height: 21px; color: #33404a; text-align: center; }
-.heatmap td::before { content: ""; position: absolute; inset: 2px; z-index: -1; border-radius: 5px; background: color-mix(in oklab, var(--hm-high) calc(var(--v, 0) * 100%), var(--hm-low)); }
-.heatmap td.dark { color: #fff; }
 
 /* Beyond the paper */
 .beyond .eyebrow { color: var(--muted); }
@@ -305,8 +273,6 @@ dialog img { width: auto; max-width: 100%; margin: 0 auto; }
   .hero-nav { padding: 20px 32px; }
   .hero--cover .hero-foot { right: 32px; left: 32px; }
   .trio { grid-template-columns: 1fr; }
-  .table-pair { grid-template-columns: minmax(0, 470px); gap: 28px; }
-  .heatmap { justify-self: center; }
 }
 @media (max-width: 800px) {
   .desktop-break { display: none; }
@@ -354,7 +320,6 @@ dialog img { width: auto; max-width: 100%; margin: 0 auto; }
   .tabs button { font-size: 13px; }
   .chapters { justify-content: flex-start; gap: 10px 18px; }
   .data-table { font-size: 13px; }
-  .heatmap td { width: 50px; font-size: 12px; }
   dialog { width: calc(100vw - 22px); padding: 28px 10px 10px; }
   .citation pre { padding: 14px 12px; font-size: 11px; }
 }
@@ -366,15 +331,53 @@ dialog img { width: auto; max-width: 100%; margin: 0 auto; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
 }
+
+/* ---------- This page ---------- */
+/* Opening: the three robots, composited into one clip with its edges faded to black, sit on the left;
+   the 51 Hz oscillator sits under the title. Both clips are drawn on black, so no overlay gradient. */
+.hero--demos { --fh: max(100svh, 640px); }   /* height of .hero-frame */
+.hero--demos .hero-frame::after { display: none; }
+.hero--demos .hero-media { inset: 60px auto 78px 2vw; width: 58vw; }
+.hero--demos .hero-media video { object-fit: contain; object-position: 50% 50%; }
+.hero--demos .hero-heading { top: clamp(72px, 10svh, 116px); width: min(35vw, 600px); }
+.hero--demos .title-main { font-size: clamp(36px, 3.6vw, 64px); }
+.hero--demos .hero-foot p { max-width: min(38vw, 560px); }
+/* The 51 Hz clip's caption ends level with the bottom of the robot clip on the left. That clip
+   (1280 x 952) is contained in a 58vw-wide box from 60px below the top to 78px above the bottom,
+   centred vertically, so its bottom sits fh/2 + 9px - (its height)/2 above the frame's bottom. */
+.hero-side { position: absolute; right: 5vw; bottom: calc(var(--fh) / 2 + 9px - min(var(--fh) - 138px, 43.14vw) / 2); width: min(35vw, 600px); }
+.hero-inset { width: min(100%, 420px); }
+.hero-inset video { border: 3px solid #fff; background: #000; }
+.hero-inset figcaption { margin-top: 10px; font-size: 13px; text-align: center; color: #e6e6e2; }
+/* Clips drawn on white */
+.clip--light video { background: #fff; }
+@media (max-height: 600px) and (min-width: 901px) {
+  .hero-side { display: none; }
+}
+@media (max-width: 900px) {
+  .hero--demos .hero-frame { display: flex; flex-direction: column; height: auto; min-height: 0; padding-top: 56px; }
+  .hero--demos .hero-media { position: relative; inset: auto; z-index: 0; width: auto; }
+  .hero--demos .hero-media video { height: auto; }
+  .hero--demos .hero-heading { position: relative; inset: auto; width: auto; max-width: 640px; margin: 8px 32px 0; }
+  .hero-side { position: relative; inset: auto; width: auto; max-width: 640px; margin: 28px 32px 0; }
+  .hero--demos .hero-explore { position: relative; inset: auto; align-self: flex-start; margin: 28px 32px 0; transform: none; }
+  .hero--demos .hero-foot { position: relative; inset: auto; margin: 22px 32px 20px; }
+  .hero--demos .hero-foot p { max-width: none; }
+}
+@media (max-width: 650px) {
+  .hero--demos .hero-heading, .hero-side { margin-right: 24px; margin-left: 24px; }
+  .hero--demos .hero-explore { margin-left: 24px; }
+  .hero--demos .hero-foot { margin-right: 24px; margin-left: 24px; }
+}
   </style>
 </head>
 <body style="--accent:#6a3d9e; --accent-hero:#c9a6ff">
   <a class="skip" href="#overview">Skip to content</a>
 
-  <header class="hero hero--cover is-split" style="--hero-pos:100% 50%; --hero-pos-mobile:69% 50%">
+  <header class="hero hero--cover hero--demos">
     <div class="hero-frame">
       <div class="hero-media">
-        <video id="hero-video" class="loop" muted loop playsinline controls preload="metadata" poster="hero.jpg" width="1920" height="1080" aria-label="The untethered swimming robot stands on a black drape and flaps its white fin from side to side." aria-describedby="hero-caption">
+        <video id="hero-video" class="loop" muted loop playsinline controls preload="metadata" poster="hero.jpg" width="1280" height="952" aria-label="Three robots driven by the oscillator, stacked on black: the jumping robot hops from right to left along a grey floor, the crawling robot crawls from left to right over dark fabric, and five swimming robots in a tank, started together, trace a tight left turn, a wide left turn, a straight path, a wide right turn and a tight right turn." aria-describedby="hero-caption">
           <source src="hero.mp4" type="video/mp4">
         </video>
       </div>
@@ -385,10 +388,16 @@ dialog img { width: auto; max-width: 100%; margin: 0 auto; }
         <p class="eyebrow">Soft actuation</p>
         <h1><span class="title-main">Pneumatic Hybrid Oscillator</span><span class="title-detail">A non-electrical oscillator for high-frequency multimodal robotic locomotion</span></h1>
       </div>
+      <div class="hero-side">
+        <figure class="hero-inset">
+          <video id="hero-oscillator" class="loop" muted loop playsinline controls preload="metadata" poster="hero-51hz.jpg" width="720" height="378" aria-label="The oscillator under violet light, in real time: its four-armed rocker turns so fast that it is a blur."><source src="hero-51hz.mp4" type="video/mp4"></video>
+          <figcaption><span style="white-space:nowrap">51 Hz</span> self-oscillation @ <span style="white-space:nowrap">180 kPa</span></figcaption>
+        </figure>
+      </div>
       <a class="hero-explore" href="#overview">Explore the design <span aria-hidden="true">↓</span></a>
       <div class="hero-foot">
-        <p id="hero-caption">Untethered swimmer: with its CO₂ cylinder on board, the robot flaps its fin on a black drape.</p>
-        <button class="motion" type="button" data-video="hero-video">Play clip</button>
+        <p id="hero-caption">Top to bottom: the jumping robot at <span style="white-space:nowrap">28 Hz</span> (8× slow motion), the crawling robot (real time) and five swimming runs started together (2.5× speed).</p>
+        <button class="motion" type="button" data-video="hero-video hero-oscillator">Play clip</button>
       </div>
     </div>
     <div class="hero-meta">
@@ -412,9 +421,9 @@ dialog img { width: auto; max-width: 100%; margin: 0 auto; }
     <section class="section statement" id="overview">
       <div class="reading">
         <p class="eyebrow">The idea</p>
-        <h2>Air in, rhythm out:<br><em>a 51 Hz oscillator with no electronics.</em></h2>
-        <p class="lead">Two fabric chambers, a carbon-fiber beam and a switch valve turn a constant air supply into a back-and-forth rotation, up to 51 times a second.</p>
-        <p>The beam snaps between its two stable shapes in <span style="white-space:nowrap">9 ms</span>, and each snap flips the valve, which sends the air to the other chamber. No microcontroller or solenoid valve is involved. The same oscillator drives a jumping robot modeled on a kangaroo, a crawling robot built from two linked oscillators, and a swimming robot that carries its own CO₂ cylinder.</p>
+        <h2>Snap-through + kinked tube<br><em>achieves negative feedback self-oscillation.</em></h2>
+        <p class="lead">Two fabric chambers, a carbon-fiber beam and a switch valve turn a constant air supply into a back-and-forth rotation, up to <span style="white-space:nowrap">51 Hz</span>.</p>
+        <p>The beam snaps between its two stable shapes in <span style="white-space:nowrap">9 ms</span>, and each snap flips the valve, which sends the air to the other chamber. No microcontroller or solenoid valve is involved. The same oscillator drives a jumping robot modeled on a kangaroo, a crawling robot built from two linked oscillators, and a swimming robot with tunable phases.</p>
       </div>
     </section>
 
@@ -444,11 +453,14 @@ dialog img { width: auto; max-width: 100%; margin: 0 auto; }
         <div><span>02</span><h4>Beam snaps</h4><p>The carbon-fiber beam snaps through to its other stable shape, in <span style="white-space:nowrap">9 ms</span>.</p></div><span class="arrow" aria-hidden="true">→</span>
         <div><span>03</span><h4>Rocker re-routes air</h4><p>The rocker flips, pinching one tube and opening another, so the other chamber fills.</p></div>
       </div>
-      <figure class="wide clip"><video id="clip-principle" class="loop" muted loop playsinline controls preload="none" poster="clip-principle.jpg" width="1280" height="466" aria-label="Schematic animation: chamber A fills while chamber B empties, the beam snaps, the valve's tubes swap, and chamber B fills while A empties."><source src="clip-principle.mp4" type="video/mp4"></video><figcaption class="figure-foot"><span>Schematic animation of one cycle: chamber A fills while chamber B empties; then the beam snaps, the valve switches, and the two chambers swap roles.</span><button type="button" class="motion" data-video="clip-principle">Play clip</button></figcaption></figure>
+      <div class="wide pair match">
+        <figure class="clip clip--light" style="--ar:2.5415"><video id="clip-principle" class="loop" muted loop playsinline controls preload="none" poster="clip-principle.jpg" width="1164" height="458" aria-label="Schematic animation: chamber A fills while chamber B empties, the beam snaps, the valve's tubes swap, and chamber B fills while A empties."><source src="clip-principle.mp4" type="video/mp4"></video><figcaption class="figure-foot"><span>Schematic of one cycle: chamber A fills while chamber B empties; then the beam snaps, the valve switches, and the two chambers swap roles.</span><button type="button" class="motion" data-video="clip-principle">Play clip</button></figcaption></figure>
+        <figure class="clip clip--light" style="--ar:2.3881"><video id="clip-airflow" class="loop" muted loop playsinline controls preload="none" poster="clip-airflow.jpg" width="1280" height="536" aria-label="Rendered animation of the oscillator from above: arrows carry air from the supply into one chamber and from the other chamber out to the atmosphere; at each snap the rocker flips and the two chambers swap."><source src="clip-airflow.mp4" type="video/mp4"></video><figcaption class="figure-foot"><span>The same cycle in the rendered oscillator (Supplementary Movie 2): air from the supply fills one chamber while the other vents to the atmosphere.</span><button type="button" class="motion" data-video="clip-airflow">Play clip</button></figcaption></figure>
+      </div>
       <div class="reading">
         <p>In the real oscillator, the rigid parts are 3D-printed. A high-speed camera filming at <span style="white-space:nowrap">1000 frames</span> per second shows the beam snapping through in <span style="white-space:nowrap">9 ms</span> and a full cycle taking <span style="white-space:nowrap">19 ms</span>, which is <span style="white-space:nowrap">51 Hz</span>. The oscillator kept running for more than <span style="white-space:nowrap">3 million</span> cycles without a significant loss of performance.</p>
       </div>
-      <figure class="reading clip" style="max-width:600px"><video id="clip-snap" class="loop" muted loop playsinline controls preload="none" poster="clip-snap.jpg" width="1128" height="1080" aria-label="Black-and-white high-speed view from above: the oscillator's four-armed rocker turns back and forth."><source src="clip-snap.mp4" type="video/mp4"></video><figcaption class="figure-foot"><span>The oscillator at <span style="white-space:nowrap">51 Hz</span> and <span style="white-space:nowrap">180 kPa</span>, filmed at high speed: the four-armed rocker turns back and forth as the valve switches. 30× slow motion.</span><button type="button" class="motion" data-video="clip-snap">Play clip</button></figcaption></figure>
+      <figure class="reading clip" style="max-width:600px"><video id="clip-snap" class="loop" muted loop playsinline controls preload="none" poster="clip-snap.jpg" width="1280" height="978" aria-label="Black-and-white high-speed view from above: the oscillator's four-armed rocker turns back and forth."><source src="clip-snap.mp4" type="video/mp4"></video><figcaption class="figure-foot"><span>The oscillator at <span style="white-space:nowrap">51 Hz</span> and <span style="white-space:nowrap">180 kPa</span>, filmed at high speed: the four-armed rocker turns back and forth as the valve switches. 30× slow motion.</span><button type="button" class="motion" data-video="clip-snap">Play clip</button></figcaption></figure>
       <figure class="wide paper-fig"><a class="zoom" href="fig-2-high-speed.webp"><img src="fig-2-high-speed.webp" width="2000" height="352" loading="lazy" alt="Figure 2g: five high-speed frames at 0, 4, 9, 15 and 19 ms, from the initial state through a half cycle to a full cycle."></a><figcaption><span style="white-space:nowrap">Fig. 2g</span>: high-speed frames of one cycle, <span style="white-space:nowrap">19 ms</span> from start to finish.</figcaption></figure>
       <details class="evidence reading"><summary>See the real parts in the loop</summary><figure class="paper-fig"><a class="zoom" href="fig-2-construction.webp"><img src="fig-2-construction.webp" width="2000" height="607" loading="lazy" alt="Figure 2f: photographs of a fabric actuation chamber, the elastic beam bending up and down, and the switch valve with its four tubes, linked by arrows labelled actuate, switch and in/deflate."></a><figcaption><span style="white-space:nowrap">Fig. 2f</span>: the actuation chamber, the elastic beam and the switch valve, in the feedback loop that keeps the oscillator running.</figcaption></figure></details>
     </section>
@@ -459,11 +471,14 @@ dialog img { width: auto; max-width: 100%; margin: 0 auto; }
         <h2>A frequency<br><em>you can design.</em></h2>
         <p class="question">Can we predict how fast it will oscillate?</p>
         <p>The authors model the oscillator as an electrical circuit. Each chamber acts as a capacitor that stores pneumatic energy; the beam as a capacitor joined to a comparator that flips state when the beam snaps; and the valve as a pair of resistances that switch between high and low. Further resistances stand for the losses in the chambers, the beam and the tubes. The model predicts the oscillation frequency from the supply pressure and the beam's design: its normalized length λ, the assembled length divided by the original length, and its bending stiffness EI.</p>
+      </div>
+      <figure class="wide paper-fig" style="max-width:960px"><a class="zoom" href="fig-3-equivalent-model.webp"><img src="fig-3-equivalent-model.webp" width="2054" height="520" loading="lazy" alt="Left: the oscillator's design schematic, with chamber A, chamber B, the elastic beam and the switch valve shaded. Middle: the analogous circuit with the same parts shaded, linked to the schematic by an arrow labelled energy equivalence, supply pressure to voltage and volume flow to current. Right: the circuit in its two states, signal high with the angle positive and signal low with the angle negative, the filling half in red and the emptying half in blue."></a><figcaption><span style="white-space:nowrap">Supplementary Fig. 12a</span> and <span style="white-space:nowrap">Fig. 3a (ii–iii)</span>: the oscillator and its analogous circuit, matched part for part by energy, with the supply pressure P<sub>s</sub> as a voltage U<sub>0</sub> and the volume flow rate as a current I; right, the circuit's two states. When the beam snaps, the signal flips between high (θ&nbsp;&gt;&nbsp;0) and low (θ&nbsp;&lt;&nbsp;0) and the valve's resistances swap; red marks the filling half, blue the emptying half.</figcaption></figure>
+      <div class="reading">
         <p>Nine oscillators, with λ from 0.93 to 0.98 and EI from 0.9 to <span style="white-space:nowrap">2.3 mN·m²</span>, were tested against the model. Their frequency rises roughly logarithmically with pressure up to about <span style="white-space:nowrap">80 kPa</span>, then levels off and peaks at about <span style="white-space:nowrap">120–150 kPa</span>, because at high pressure the soft valve partly blocks the airflow. A stiffer beam needs more torque to snap, which lowers the frequency; a beam with both a low λ and a low stiffness weakens the valve's blocking, and the oscillation stops early at high pressure.</p>
         <p>With <span style="white-space:nowrap">λ = 0.98</span> and <span style="white-space:nowrap">EI = 1.6 mN·m²</span>, the oscillator reached <span style="white-space:nowrap">51 Hz</span>: 3.3 times the fastest earlier oscillator that drives motion, and 15 times a bistable ring oscillator. It works with supply pressures from 8 to <span style="white-space:nowrap">180 kPa</span>.</p>
       </div>
       <div class="wide pair match">
-        <figure class="clip" style="--ar:1.1315"><video id="clip-ramp" class="loop" muted loop playsinline controls preload="none" poster="clip-ramp.jpg" width="1222" height="1080" aria-label="The oscillator under violet light, its rocker wheel blurred, while labels show the frequency rising to 51 Hz and the pressure to 180 kPa."><source src="clip-ramp.mp4" type="video/mp4"></video><figcaption class="figure-foot"><span>Under violet light, as the supply pressure is raised to <span style="white-space:nowrap">180 kPa</span>, the frequency label reaches <span style="white-space:nowrap">51 Hz</span>; at this rate the rocker is a blur. Real time.</span><button type="button" class="motion" data-video="clip-ramp">Play clip</button></figcaption></figure>
+        <figure class="clip" style="--ar:1.4097"><video id="clip-ramp" class="loop" muted loop playsinline controls preload="none" poster="clip-ramp.jpg" width="1280" height="908" aria-label="The oscillator under violet light, at rest at 0 Hz and 0 kPa; as labels show the pressure rising to 180 kPa, the frequency climbs to 51 Hz and the rocker wheel blurs."><source src="clip-ramp.mp4" type="video/mp4"></video><figcaption class="figure-foot"><span>Under violet light, from rest at <span style="white-space:nowrap">0 kPa</span>: as the supply pressure is raised to <span style="white-space:nowrap">180 kPa</span>, the frequency label climbs from 0 to <span style="white-space:nowrap">51 Hz</span>, where the rocker is a blur. Real time.</span><button type="button" class="motion" data-video="clip-ramp">Play clip</button></figcaption></figure>
         <figure class="paper-fig" style="--ar:1.1775"><a class="zoom" href="fig-3-frequency.webp"><img src="fig-3-frequency.webp" width="1128" height="958" loading="lazy" alt="Figure 3e: frequency against supply pressure from 0 to 180 kPa for three normalized lengths, 0.98, 0.95 and 0.93, at EI 1.6 mN·m²; the frequency rises and levels off, highest for 0.98."></a><figcaption><span style="white-space:nowrap">Fig. 3e</span>: frequency against supply pressure for <span style="white-space:nowrap">λ = 0.98,</span> 0.95 and 0.93 at <span style="white-space:nowrap">EI = 1.6 mN·m²</span>; dashed lines from the model, markers from the experiments.</figcaption></figure>
       </div>
       <div class="wide stats">
@@ -477,7 +492,7 @@ dialog img { width: auto; max-width: 100%; margin: 0 auto; }
     <section class="section" id="jumping">
       <div class="reading">
         <p class="eyebrow">04 / Jumping robot</p>
-        <h2>A 28 Hz<br><em>kangaroo.</em></h2>
+        <h2>A 5.1 BL/s speed<br><em>kangaroo.</em></h2>
         <p class="question">What does a fast oscillator do for a legged robot?</p>
         <p>A kangaroo reaches <span style="white-space:nowrap">8 body lengths</span> per second with rapid swings of its feet. The kangaroo-inspired robot fixes a two-legged frame to the oscillator's active joint. Backward-angled nails on its feet grip harder in one direction than the other, and a flexible tail keeps it balanced. Like the animal, it moves in three phases: pushing, taking off and landing.</p>
         <p>The supply pressure sets the oscillator's frequency, and with it the robot's speed. At <span style="white-space:nowrap">100 kPa</span> the robot runs at <span style="white-space:nowrap">28 Hz</span> and reaches <span style="white-space:nowrap">5.1 body lengths</span> per second (<span style="white-space:nowrap">5.1 BL/s</span>, <span style="white-space:nowrap">68 cm/s</span>), more than twice the speed of pneumatic robots that use electromagnetic valves. It can be driven at up to <span style="white-space:nowrap">36 Hz</span>, but above about <span style="white-space:nowrap">28 Hz</span> it stays in the air longer and completes several motion cycles mid-air, so it gets no faster. The fastest leg mounting angle was <span style="white-space:nowrap">β = 100°</span>, and the robot weighs <span style="white-space:nowrap">30 g</span>.</p>
@@ -513,7 +528,7 @@ dialog img { width: auto; max-width: 100%; margin: 0 auto; }
     <section class="section" id="swimming">
       <div class="reading">
         <p class="eyebrow">06 / Swimming robot</p>
-        <h2>Steering<br><em>by phase.</em></h2>
+        <h2>Phase Tuning<br><em>by constraints adjustment.</em></h2>
         <p class="question">How do you steer a robot with no controller?</p>
         <p>Changing a robot's course usually means changing its stroke, which takes a microcontroller. Here the oscillator's phase is set mechanically. An auxiliary beam is pinned to the passive joint at one end and clamped at a fixed angle γ at the other. At <span style="white-space:nowrap">γ = 90°</span> it bends the same way in both directions, and the active joint takes as long to swing one way as the other (<span style="white-space:nowrap">T1 = T2</span>). Clamped above or below 90°, it adds a different torque in each direction, so one swing takes longer than the other.</p>
       </div>
@@ -524,9 +539,13 @@ dialog img { width: auto; max-width: 100%; margin: 0 auto; }
       </div>
       <p class="wide strip-caption">One oscillator with its auxiliary beam clamped at three angles; each inset plots the active joint's angle over time.</p>
       <div class="reading">
+        <p>Why does the clamp angle shift the phase? The authors extend their beam model to the main beam and the auxiliary beam in series, joined at the passive joint, and compute the energy stored in the beams and the torque needed on the active joint as it turns. At <span style="white-space:nowrap">γ = 90°</span> the two snaps mirror each other: the beam snaps at <span style="white-space:nowrap">±15.4°</span> and needs <span style="white-space:nowrap">0.0571 N·m</span> in each direction. At <span style="white-space:nowrap">γ = 110°</span>, the snap one way needs <span style="white-space:nowrap">0.0641 N·m</span> and releases more energy, while the snap back needs <span style="white-space:nowrap">0.0574 N·m</span>; at 70° the two swap. A chamber has to fill for longer to reach the larger torque, so the two half-strokes take different times. Both torques are above the symmetric value, so moving γ away from 90° also lowers the frequency, while the snap angles shift by less than 1.5°, so the stroke stays nearly the same.</p>
+      </div>
+      <figure class="reading paper-fig" style="max-width:620px"><a class="zoom" href="fig-s19-phase-energy.webp"><img src="fig-s19-phase-energy.webp" width="924" height="1054" loading="lazy" alt="Supplementary Figure 19: three rows for gamma equal to 110, 90 and 70 degrees. Each row shows the two beams, the regulated total energy and the active torque against the active shaft angle. At 90 degrees both plots are symmetric, with snaps at plus and minus 15.4 degrees and torques of plus and minus 0.0571 newton metres; at 110 and 70 degrees the peaks are 0.0574 and 0.0641 newton metres, in opposite directions."></a><figcaption><span style="white-space:nowrap">Supplementary Fig. 19</span>: for <span style="white-space:nowrap">γ = 110°</span>, 90° and 70° (a–c), the two beams (left), their regulated total energy (middle) and the torque on the active shaft (right), against the active shaft angle; the vertical jumps are the snaps.</figcaption></figure>
+      <div class="reading">
         <p>The swimming robot carries a phase-tunable oscillator, a CO₂ gas cylinder as its air supply, a fin on the active joint and a 3D-printed container for buoyancy, so it needs no tether. A clamp on the auxiliary beam serves as a knob for setting γ by hand. At <span style="white-space:nowrap">γ = 90°</span> the robot swims straight, oscillating at <span style="white-space:nowrap">2.3 Hz</span>, at <span style="white-space:nowrap">0.6 BL/s</span> on about <span style="white-space:nowrap">50 kPa</span>; at 100° it turns left and at 80° right, both at <span style="white-space:nowrap">2 Hz</span> and <span style="white-space:nowrap">0.5 BL/s</span>. At <span style="white-space:nowrap">γ = 110°</span> it turns through more than 180° within a radius of <span style="white-space:nowrap">260 mm</span>, less than <span style="white-space:nowrap">1.5 body lengths</span>.</p>
       </div>
-      <figure class="wide clip"><video id="clip-tank" class="loop" muted loop playsinline controls preload="none" poster="clip-tank.jpg" width="1280" height="720" aria-label="Five top views of the swimming robot in a dark tank, side by side; yellow lines trace a tight left turn, a wide left turn, a straight path, a wide right turn and a tight right turn."><source src="clip-tank.mp4" type="video/mp4"></video><figcaption class="figure-foot"><span>Five runs in the tank, seen from above, at <span style="white-space:nowrap">γ = 110°</span>, 100°, 90°, 80° and 70°: tight and wide left turns, straight, wide and tight right turns, each traced in yellow. Real time.</span><button type="button" class="motion" data-video="clip-tank">Play clip</button></figcaption></figure>
+      <figure class="wide clip"><video id="clip-tank" class="loop" muted loop playsinline controls preload="none" poster="clip-tank.jpg" width="1280" height="552" aria-label="Five top views of the swimming robot in a dark tank, side by side and started together; yellow lines trace a tight left turn, a wide left turn, a straight path, a wide right turn and a tight right turn."><source src="clip-tank.mp4" type="video/mp4"></video><figcaption class="figure-foot"><span>Five runs in the tank, seen from above and started together, at <span style="white-space:nowrap">γ = 110°</span>, 100°, 90°, 80° and 70°: tight and wide left turns, straight, wide and tight right turns, each traced in yellow. Real time.</span><button type="button" class="motion" data-video="clip-tank">Play clip</button></figcaption></figure>
       <figure class="wide paper-fig"><a class="zoom" href="fig-6-swimming.webp"><img src="fig-6-swimming.webp" width="2000" height="1034" loading="lazy" alt="Figure 6d: three composite top views of the swimming robot every 3 seconds, turning left at gamma 100 degrees, going straight at 90 degrees and turning right at 80 degrees."></a><figcaption><span style="white-space:nowrap">Fig. 6d</span>: left turn (<span style="white-space:nowrap">γ = 100°</span>), straight (90°) and right turn (80°), with the robot shown every <span style="white-space:nowrap">3 s</span>.</figcaption></figure>
       <div class="wide stats">
         <div class="stat"><b>0.6 BL/s</b><span>Swimming straight, at 2.3&nbsp;Hz</span></div>
@@ -621,7 +640,7 @@ dialog img { width: auto; max-width: 100%; margin: 0 auto; }
           </div>
         </div>
         <div class="tab-panel" id="panel-movie-03" role="tabpanel" aria-labelledby="tab-movie-03">
-          <video id="video-movie-03" controls playsinline preload="none" poster="video-movie-03.jpg" width="1280" height="444" aria-label="Supplementary Movie 3: an animation of the beam snapping between its two stable shapes, then the same with plots of torque, energy and joint angles."><source src="video-movie-03.mp4" type="video/mp4">Your browser does not support embedded video. <a href="video-movie-03.mp4">Download the video</a>.</video>
+          <video id="video-movie-03" controls playsinline preload="none" poster="video-movie-03.jpg" width="1280" height="568" aria-label="Supplementary Movie 3: an animation of the beam snapping between its two stable shapes, then the same with plots of torque, energy and joint angles."><source src="video-movie-03.mp4" type="video/mp4">Your browser does not support embedded video. <a href="video-movie-03.mp4">Download the video</a>.</video>
           <p><b>Supplementary Movie 3:</b> Snap-through buckling behavior of the elastic beam. The beam between its two joints, its snap-through, and plots of torque, elastic energy and the two joint angles.</p>
           <div class="chapters" aria-label="Chapters of Movie 3">
             <button type="button" data-target="video-movie-03" data-time="4"><span>0:04</span>Beam and joints</button>
@@ -630,7 +649,7 @@ dialog img { width: auto; max-width: 100%; margin: 0 auto; }
           </div>
         </div>
         <div class="tab-panel" id="panel-movie-04" role="tabpanel" aria-labelledby="tab-movie-04">
-          <video id="video-movie-04" controls playsinline preload="none" poster="video-movie-04.jpg" width="1280" height="442" aria-label="Supplementary Movie 4: a schematic in which the two chambers fill in turn as the valve switches."><source src="video-movie-04.mp4" type="video/mp4">Your browser does not support embedded video. <a href="video-movie-04.mp4">Download the video</a>.</video>
+          <video id="video-movie-04" controls playsinline preload="none" poster="video-movie-04.jpg" width="1280" height="564" aria-label="Supplementary Movie 4: a schematic in which the two chambers fill in turn as the valve switches."><source src="video-movie-04.mp4" type="video/mp4">Your browser does not support embedded video. <a href="video-movie-04.mp4">Download the video</a>.</video>
           <p><b>Supplementary Movie 4:</b> Working principle of the PHO. A schematic of the chambers, the beam and the valve: each chamber fills in turn as the valve switches.</p>
           <div class="chapters" aria-label="Chapters of Movie 4">
             <button type="button" data-target="video-movie-04" data-time="5"><span>0:05</span>Chamber A fills</button>
@@ -640,7 +659,7 @@ dialog img { width: auto; max-width: 100%; margin: 0 auto; }
           </div>
         </div>
         <div class="tab-panel" id="panel-movie-05" role="tabpanel" aria-labelledby="tab-movie-05">
-          <video id="video-movie-05" controls playsinline preload="none" poster="video-movie-05.jpg" width="822" height="720" style="max-width:822px; margin:0 auto" aria-label="Supplementary Movie 5: the oscillator under violet light as the pressure rises and the frequency climbs to 51 Hz, then the same oscillation at 30 times slow motion."><source src="video-movie-05.mp4" type="video/mp4">Your browser does not support embedded video. <a href="video-movie-05.mp4">Download the video</a>.</video>
+          <video id="video-movie-05" controls playsinline preload="none" poster="video-movie-05.jpg" width="1030" height="720" style="max-width:822px; margin:0 auto" aria-label="Supplementary Movie 5: the oscillator under violet light as the pressure rises and the frequency climbs to 51 Hz, then the same oscillation at 30 times slow motion."><source src="video-movie-05.mp4" type="video/mp4">Your browser does not support embedded video. <a href="video-movie-05.mp4">Download the video</a>.</video>
           <p><b>Supplementary Movie 5:</b> High-frequency oscillation of the PHO. Under violet light, the frequency climbs to <span style="white-space:nowrap">51 Hz</span> as the pressure rises to <span style="white-space:nowrap">180 kPa</span>; then the oscillation at 30× slow motion.</p>
           <div class="chapters" aria-label="Chapters of Movie 5">
             <button type="button" data-target="video-movie-05" data-time="4.5"><span>0:04</span>Rising pressure, real time</button>
@@ -685,7 +704,7 @@ dialog img { width: auto; max-width: 100%; margin: 0 auto; }
           </div>
         </div>
         <div class="tab-panel" id="panel-movie-10" role="tabpanel" aria-labelledby="tab-movie-10">
-          <video id="video-movie-10" controls playsinline preload="none" poster="video-movie-10.jpg" width="1280" height="720" aria-label="Supplementary Movie 10: the swimming robot on a black drape, hands opening its valve, its fin flapping, then five runs in a tank seen from above."><source src="video-movie-10.mp4" type="video/mp4">Your browser does not support embedded video. <a href="video-movie-10.mp4">Download the video</a>.</video>
+          <video id="video-movie-10" controls playsinline preload="none" poster="video-movie-10.jpg" width="1440" height="720" aria-label="Supplementary Movie 10: the swimming robot on a black drape, hands opening its valve, its fin flapping, then five runs in a tank seen from above."><source src="video-movie-10.mp4" type="video/mp4">Your browser does not support embedded video. <a href="video-movie-10.mp4">Download the video</a>.</video>
           <p><b>Supplementary Movie 10:</b> Course-tunable untethered swimming robot. The robot and its parts, the valve opened by hand, the fin flapping, then five runs in a tank at <span style="white-space:nowrap">γ = 110°</span> to 70°.</p>
           <div class="chapters" aria-label="Chapters of Movie 10">
             <button type="button" data-target="video-movie-10" data-time="4.6"><span>0:04</span>The robot</button>
@@ -727,12 +746,15 @@ dialog img { width: auto; max-width: 100%; margin: 0 auto; }
   const loops = [...document.querySelectorAll("video.loop")];
   const manualPause = new WeakSet();
   const inView = new WeakSet();
-  const buttonFor = (video) => document.querySelector(`[data-video="${video.id}"]`);
+  // A button's data-video lists one or more clip ids; it plays or pauses all of them together.
+  const buttonFor = (video) => document.querySelector(`[data-video~="${video.id}"]`);
+  const videosOf = (button) => button.dataset.video.split(/\s+/).map((id) => document.getElementById(id)).filter(Boolean);
   function update(video) {
     const button = buttonFor(video);
     if (!button) return;
-    button.textContent = video.paused ? "Play clip" : "Pause clip";
-    button.setAttribute("aria-pressed", String(!video.paused));
+    const playing = videosOf(button).some((v) => !v.paused);
+    button.textContent = playing ? "Pause clip" : "Play clip";
+    button.setAttribute("aria-pressed", String(playing));
   }
   function play(video) {
     const promise = video.play();
@@ -745,13 +767,16 @@ dialog img { width: auto; max-width: 100%; margin: 0 auto; }
     video.addEventListener("play", () => update(video));
     video.addEventListener("pause", () => update(video));
     update(video);
-    const button = buttonFor(video);
-    if (button) {
-      button.addEventListener("click", () => {
-        if (video.paused) { manualPause.delete(video); play(video); }
-        else { manualPause.add(video); video.pause(); }
+  });
+  document.querySelectorAll("button[data-video]").forEach((button) => {
+    const videos = videosOf(button);
+    button.addEventListener("click", () => {
+      const playing = videos.some((v) => !v.paused);
+      videos.forEach((v) => {
+        if (playing) { manualPause.add(v); v.pause(); }
+        else { manualPause.delete(v); play(v); }
       });
-    }
+    });
   });
   if ("IntersectionObserver" in window) {
     const observer = new IntersectionObserver((entries) => entries.forEach(({ target, isIntersecting }) => {
